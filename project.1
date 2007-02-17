@@ -42,7 +42,10 @@ echo_b	DelayEcho	amp_b	250	0.4	R_EchoReAmp
 * Mix both channels together
 mix	Mixer	echo_l	echo_b
 *
+* test FIR
+fir		FiniteImpulseResponse mix
+*
 * Write to disk
-return	mix	/tmp/test.wav
+return	fir	/tmp/test.wav
 
 

@@ -13,15 +13,16 @@ import de.cgarbs.apsynth.signal.library.ClipperClass;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass;
 import de.cgarbs.apsynth.signal.library.DelayEchoClass;
 import de.cgarbs.apsynth.signal.library.EndianChangerClass;
+import de.cgarbs.apsynth.signal.library.FiniteImpulseResponseClass;
 import de.cgarbs.apsynth.signal.library.MixerClass;
 import de.cgarbs.apsynth.signal.library.PinkNoiseClass;
-import de.cgarbs.apsynth.signal.library.RegisterClass;
-import de.cgarbs.apsynth.signal.library.SquineWaveClass;
-import de.cgarbs.apsynth.signal.library.WhiteNoiseClass;
 import de.cgarbs.apsynth.signal.library.QuantizerClass;
+import de.cgarbs.apsynth.signal.library.RegisterClass;
 import de.cgarbs.apsynth.signal.library.SawtoothWaveClass;
 import de.cgarbs.apsynth.signal.library.SineWaveClass;
 import de.cgarbs.apsynth.signal.library.SquareWaveClass;
+import de.cgarbs.apsynth.signal.library.SquineWaveClass;
+import de.cgarbs.apsynth.signal.library.WhiteNoiseClass;
 import de.cgarbs.apsynth.storage.FilesystemStorage;
 
 public class Apsynth {
@@ -48,6 +49,7 @@ public class Apsynth {
         Pool.registerSignalClass(new de.cgarbs.apsynth.signal.library.NullClass());
         Pool.registerSignalClass(new RegisterClass());
         Pool.registerSignalClass(new ArpeggioClass());
+        Pool.registerSignalClass(new FiniteImpulseResponseClass());
 
         Pool.registerInstrumentClass(new SineClass());
         Pool.registerInstrumentClass(new SquareClass());
