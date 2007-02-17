@@ -1,0 +1,22 @@
+TODO
+====
+
+ 
+DONE
+====
+
+ * optimized various signal classes when called with constants
+
+20060419:
+
+ * add arpeggios (track jesu.1)
+ * DelayEcho is now measured in milliseconds instead of ticks
+
+20060417:
+
+ * add registers (global variables)
+ * fix detection of song end (using track registry)
+ 
+20060410:
+
+ * fix detection of empty lines

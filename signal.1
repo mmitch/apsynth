@@ -1,0 +1,31 @@
+* This is an Apsynth signal definition file.
+* ----------------------------------------------------------------
+* Comments are started with "* ".
+* Tokens are separated by whitespace(s).
+*
+* A line in the form
+* define <SignalClassName> <parameterCount>
+* starts the definition of a new SignalClass.
+* Parameters are available under the names <var0> .. <varN>.
+*
+* Every line in the form
+* <name>  <SignalClass>  [<parameter> [<...>]]
+* defines a new Signal <name> of type <SignalClass>.
+* Parameters vary depending on <SignalClass> (see SIGNALCLASSES).
+*
+* "return" is a special <name>, it defines the return value
+* of the defined SignalClass.
+*
+* ----------------------------------------------------------------
+* This will take an input signal, apply amplification and echo to
+* it and return it.
+define	OwnSignal	1
+amp	Amplifier	var0	0.25
+return	DelayEcho	amp	300	0.3	0.4
+*
+* This is a simple LFO with 0.2Hz and a range of [0.1; 0.9].
+* It takes no input arguments
+define	LFO1	0
+sine	SineWave	.2
+amp	Amplifier	sine	0.4
+return	Mixer	amp	0.5

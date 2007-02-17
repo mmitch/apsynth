@@ -1,0 +1,7 @@
+Registers are signals that have a Name starting with "R_".
+They can be used everywhere where a signal could be used.
+Think of them as global variables (channel volume, reverb
+setting etc.).
+
+Registers can be set during track definition by writing
+their name plus a value, e.g.: "R_MainVol 0.5"

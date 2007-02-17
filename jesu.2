@@ -1,0 +1,50 @@
+speed 0;* don't wait on comments ^_^
+*
+* This is an apsynth track file.
+* ----------------------------------------------------------------
+* Comments are started with "* ".
+* Every line can contain multiple commands separated by ";"
+* Every command can contain multiple tokens separated by
+* whitespace(s).
+*
+* This file is a simple line based tracker format.
+*
+* command      explanation        parameter(s)
+* ==========================================================
+* *            comment            n/a
+*
+* instrument   set instrument     1 = instrument name
+*              (see INSTRUMENTS)  2+= instrument parameters
+*
+* speed        set track speed    1 = lines per minute
+*
+* <note>       play note          1 = duration relative to
+*                                     length of one line
+*
+* <note> can be "a3", "c#3", "db2" or the like.
+* ----------------------------------------------------------------
+instrument Sawtooth; speed 130
+* ( 1)
+*
+R_EchoReAmp 0.2
+h4 1
+*
+R_EchoReAmp 0.3
+e4 1
+*
+R_EchoReAmp 0.4
+d5 1;* ( 2)
+*
+R_EchoReAmp 0.5
+e4 1
+*
+R_EchoReAmp 0.6
+e3 1
+*
+R_EchoReAmp 0.7
+* ( 3)
+
+
+
+
+

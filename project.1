@@ -1,0 +1,48 @@
+* This is the main Apsynth project definition file.
+* ----------------------------------------------------------------
+* Comments are started with "* ".
+* Tokens are separated by whitespace(s).
+*
+* Every line in the form
+* <name>  <SignalClass>  [<parameter> [<...>]]
+* defines a new Signal <name> of type <SignalClass>.
+* Parameters vary depending on <SignalClass> (see SIGNALCLASSES).
+*
+* "Track" is a special <SignalClass>, it reads a track definition.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "instruments" is a special <name>, it reads instrument definitions.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "signals" is a special <name>, it reads a signal definition.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "return" is a special <name>, it defines the final file output:
+* First parameter is the name of the signal to write to disk.
+* Second parameter is the filename to write to.
+* (no spaces allowed for obvious reasons)
+*
+* ----------------------------------------------------------------
+* load signal definitions from signal.1
+signals	signal.1
+* ----------------------------------------------------------------
+* Load the Track from jesu.1, turn the volume down and add an echo
+lead	Track	jesu.1
+echo_l	OwnSignal	lead
+*
+* Load the Track from jesu.2, turn the volume down and add an echo
+* Echo reamplification is mapped to register R_EchoReAmp
+bass	Track	jesu.2
+amp_b	Amplifier	bass	0.3
+echo_b	DelayEcho	amp_b	250	0.4	R_EchoReAmp
+*
+* Mix both channels together
+mix	Mixer	echo_l	echo_b
+*
+* Write to disk
+return	mix	/tmp/test.wav
+
+

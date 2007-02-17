@@ -1,0 +1,68 @@
+Apsynth default SIGNALCLASSES
+
+currently available signal classes:
+
+Name          Description
+              Parameters
+=================================================
+Amplifier     amplifies another signal (s1*s2)
+              1 = signal 1
+              2 = signal 2
+-------------------------------------------------
+Arpeggio      alternates between differen signals
+              1 = duration of each signal in ms
+              2 = first signal
+              ...
+-------------------------------------------------
+Clipper       clips a signal (s1 in [-s2; s2])
+              1 = the original signal
+              2 = the maximum value
+-------------------------------------------------
+Constant      a constant value
+              1 = the value
+-------------------------------------------------
+DelayEcho     creates a delayed echo
+              1 = the signal to echo
+              2 = delay buffer size in ms (const.)
+              3 = echo amplification
+              4 = feedback amplification
+-------------------------------------------------
+EndianChanger endian switch distortion
+              1 = the original signal
+-------------------------------------------------
+Mixer         mix two signals (s1+s2)
+              1 = signal 1
+              2 = signal 2
+-------------------------------------------------
+Null          the signal, it does nothing!
+              n/a
+-------------------------------------------------
+Quantizer     quantize values
+              1 = the signal to process
+              2 = different values
+                  (      2 == binary,
+                       256 == 8bit,
+                     65536 == 16bit )
+-------------------------------------------------
+PinkNoise     weighted random signal from [-1;1]
+              n/a
+-------------------------------------------------
+SawtoothWave  generate sawtooth signal
+              1 = frequency
+-------------------------------------------------
+SineWave      generate sine signal
+              1 = frequency
+-------------------------------------------------
+SquareWave    generate squarewave signal
+              1 = frequency
+              2 = duty [0..1]
+-------------------------------------------------
+SquineWave    generate sine/squarewave crossbreed
+              1 = frequency
+              2 = sound ]0..1]
+                  0 == square
+                  1 == sine
+-------------------------------------------------
+WhiteNoise    random signal from [-1;1]
+              n/a
+-------------------------------------------------

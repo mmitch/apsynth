@@ -1,0 +1,24 @@
+Apsynth default INSTRUMENTS
+
+currently available instruments:
+
+Name          Description
+              Parameters
+=================================================
+Null          it does nothing!
+              n/a
+-------------------------------------------------
+Sawtooth      plays a sawtoothwave
+              n/a
+-------------------------------------------------
+Sine          plays a sine wave
+              n/a
+-------------------------------------------------
+Square        plays a square wave
+              1 = duty cycle [0..1]
+-------------------------------------------------
+Squine        plays a mixed square/sine wave
+              1 = sound ]0..1]
+                  0 == square
+                  1 == sine
+-------------------------------------------------

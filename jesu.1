@@ -1,0 +1,54 @@
+speed 0;* don't wait on comments ^_^
+*
+* This is an apsynth track file.
+* ----------------------------------------------------------------
+* Comments are started with "* ".
+* Every line can contain multiple commands separated by ";"
+* Every command can contain multiple tokens separated by
+* whitespace(s).
+*
+* This file is a simple line based tracker format.
+*
+* command      explanation        parameter(s)
+* ==========================================================
+* *            pause/comment      n/a
+*
+* instrument   set instrument     1 = instrument name
+*              (see INSTRUMENTS)  2+= instrument parameters
+*
+* speed        set track speed    1 = lines per minute
+*                                     (0 == no wait)
+*
+* arp          play arpeggio      1 = duration relative to
+*                                     length of one line
+*                                 2 = arpeggio phase in ms
+*                                 3 = first <note>
+*                                 4 = second <note>
+*                                 ...
+*
+* <note>       play note          1 = duration relative to
+*                                     length of one line
+*
+* <note> can be "a3", "c#3", "db2" or the like.
+* ----------------------------------------------------------------
+signal	lfo	LFO1
+instrument Square lfo; speed 130
+arp 0.9 20 g3 g2;* ( 1)
+arp 0.9 20 g4 g3
+arp 0.9 20 a4 a3
+arp 0.9 20 g4 g3
+arp 0.9 20 d5 d4
+arp 0.9 20 c5 c4
+arp 0.9 20 c5 c4
+e5 0.9
+d5 0.9
+h3 0.9;* ( 2)
+g5 0.9
+f#5 0.9
+g5 0.9
+d5 0.9
+h4 0.9
+g4 0.9
+a4 0.9
+h4 0.9
+* ( 3)
