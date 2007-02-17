@@ -1,0 +1,38 @@
+package de.cgarbs.apsynth.instrument.library;
+
+import de.cgarbs.apsynth.Note;
+import de.cgarbs.apsynth.instrument.DefaultInstrumentClass;
+import de.cgarbs.apsynth.instrument.Instrument;
+import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.signal.Signal;
+
+public class NullClass extends DefaultInstrumentClass {
+
+    public NullClass() {
+        this.paramCount = 0;
+    }
+    
+    public String getName() {
+        return "Null";
+    }
+
+    public Instrument instanciate(Signal[] s) {
+        checkParams(s);
+        return new Null();
+    }
+
+    public class Null extends Instrument {
+
+        private Null() {
+            // no-op: no parameters 
+        }
+        
+        public Note play(Signal freq, long length) {
+            return new Note(
+                    Pool.getSignalClass("Null").instanciate(new Signal[]{}),
+                    0
+                            );
+        }
+        
+    }
+}
