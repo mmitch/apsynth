@@ -1,6 +1,12 @@
 TODO
 ====
 
+ * FIRs berechnen
+   Eingabeparameter: http://www.bores.com/courses/intro/filters/4_spec.htm
+   Umwandlungen so: http://www.bores.com/courses/intro/filters/4_pain.htm
+   oder über die Remez-Funktion (kompliziert!)
+   Am besten etwas, das sich genau so verhält wie firpm():
+   http://www.mathworks.com/access/helpdesk/help/toolbox/signal/index.html?/access/helpdesk/help/toolbox/signal/firpm.html
  
 DONE
 ====
