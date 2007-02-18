@@ -35,8 +35,8 @@ public class FilesystemStorage implements StorageBackend {
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             
-            HashMap signalRulesIndex = new HashMap();
-            Vector signalRules = new Vector();
+            HashMap<String,Short> signalRulesIndex = new HashMap<String,Short>();
+            Vector<Rule> signalRules = new Vector<Rule>();
             String line;
             String signalClassName = "";
             short signalVarCount = 0;
@@ -97,7 +97,7 @@ public class FilesystemStorage implements StorageBackend {
 	            				}
 	            				if (d == null) {
 	            					checkSignal(param, signalRulesIndex);
-	            					parameters[i] = ((Short)signalRulesIndex.get(param)).shortValue();
+	            					parameters[i] = signalRulesIndex.get(param).shortValue();
 	            				} else {
 	            					parameters[i] = (short)signalRules.size();
 	            					signalRules.add(new ConstantRule(d.doubleValue()));
@@ -116,7 +116,7 @@ public class FilesystemStorage implements StorageBackend {
 	            		int ruleCount = signalRules.size() - signalVarCount;
 	            		Rule[] rules = new Rule[ruleCount];
 	            		for (int i=0; i<ruleCount; i++) {
-	            			rules[i] = (Rule)signalRules.get(i + signalVarCount);
+	            			rules[i] = signalRules.get(i + signalVarCount);
 	            		}
 	            		Pool.registerSignalClass(
 	            				new DynamicSignalClass(signalClassName, signalVarCount, rules)
@@ -151,7 +151,7 @@ public class FilesystemStorage implements StorageBackend {
             double step = Apsynth.samplefreq * 60 / 120;
             double position = 0;
             
-            HashMap signals = new HashMap();
+            HashMap<String,Signal> signals = new HashMap<String,Signal>();
             String line;
             int lineNumber = 0;
             
@@ -350,7 +350,7 @@ public class FilesystemStorage implements StorageBackend {
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             
-            HashMap signals = new HashMap();
+            HashMap<String,Signal> signals = new HashMap<String,Signal>();
             String line;
             int lineNumber = 0;
             
@@ -425,7 +425,7 @@ public class FilesystemStorage implements StorageBackend {
 	 * @return the new Signal
 	 * @throws ParseException something went wrong
 	 */
-	private Signal parseSignalLine(HashMap signals, String[] token, int offset, String name) throws ParseException {
+	private Signal parseSignalLine(HashMap<String,Signal> signals, String[] token, int offset, String name) throws ParseException {
 		Signal signal;
 		SignalClass filterClass = Pool.getSignalClass(name);
 		int paramCount = filterClass.getParamCount();
@@ -446,7 +446,7 @@ public class FilesystemStorage implements StorageBackend {
 	 * @param param String to parse
 	 * @throws ParseException something went wrong
 	 */
-	private Signal parseSignalParameter(HashMap signals, String param) throws ParseException {
+	private Signal parseSignalParameter(HashMap<String,Signal> signals, String param) throws ParseException {
 		Double d = null;
 		try {
 			d = new Double(param);
@@ -459,7 +459,7 @@ public class FilesystemStorage implements StorageBackend {
                 return Pool.getRegister(param);
             }
 			checkSignal(param, signals);
-			return (Signal)signals.get(param);
+			return signals.get(param);
 		} else {
 			return ConstantSignalClass.get(d.doubleValue());
 		}

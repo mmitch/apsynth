@@ -3,7 +3,7 @@ package de.cgarbs.apsynth.internal;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class IntervalArray1 extends TreeMap implements IntervalArray {
+public class IntervalArray1 extends TreeMap<Long,Double> implements IntervalArray {
 
     /**
      * 

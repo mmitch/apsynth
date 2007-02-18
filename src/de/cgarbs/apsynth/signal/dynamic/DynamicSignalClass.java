@@ -32,7 +32,7 @@ public class DynamicSignalClass extends SignalClass {
         private Signal lastVar;
 
         private DynamicSignal(Rule[] r, Signal[] vars) {
-            Vector tmpVars = new Vector();
+            Vector<Signal> tmpVars = new Vector<Signal>();
             for (int i=0; i<vars.length; i++) {
                 tmpVars.add(vars[i]);
             }
@@ -43,7 +43,7 @@ public class DynamicSignalClass extends SignalClass {
                     SignalClass sc = rule.getOperator();
                     Signal[] params = new Signal[sc.getParamCount()];
                     for (short param=0; param<sc.getParamCount(); param++) {
-                        params[param] = (Signal) tmpVars.get(rule.getOperand(param));
+                        params[param] = tmpVars.get(rule.getOperand(param));
                     }
                     tmpVars.add(sc.instanciate(params));
 
@@ -56,7 +56,7 @@ public class DynamicSignalClass extends SignalClass {
                     throw new RuntimeException("Unknown rule subclass encountered");
                 }
             }
-            lastVar = (Signal) tmpVars.get(tmpVars.size()-1);
+            lastVar = tmpVars.get(tmpVars.size()-1);
         }
 
         public double get(long t) {

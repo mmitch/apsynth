@@ -7,7 +7,7 @@ import de.cgarbs.apsynth.signal.Signal;
 // TODO unneeded?
 public class ConstantSignalClass extends DefaultSignalClass {
 
-    static HashMap cache = new HashMap(); 
+    static HashMap<Double,ConstantSignal> cache = new HashMap<Double,ConstantSignal>(); 
 
     public ConstantSignalClass() {
 		this.paramCount = 1;
@@ -21,7 +21,7 @@ public class ConstantSignalClass extends DefaultSignalClass {
 	
 	public Signal instanciate(double value) {
         Double key = new Double(value);
-        ConstantSignal retVal = (ConstantSignal)cache.get(key);
+        ConstantSignal retVal = cache.get(key);
         if (retVal == null) {
             retVal = new ConstantSignal(value);
             cache.put(key, retVal);

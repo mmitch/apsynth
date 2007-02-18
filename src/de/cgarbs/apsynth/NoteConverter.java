@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class NoteConverter {
 
-    static Map notes = null;
+    static Map<String,Integer> notes = null;
     static double freqs[] = new double[12];
-    static Map cache = new HashMap();
+    static Map<String,Double> cache = new HashMap<String,Double>();
     
     private static void initialize() {
-        notes = new HashMap();
+        notes = new HashMap<String,Integer>();
 
         notes.put("c", new Integer(-9));
         notes.put("d", new Integer(-7));

@@ -34,7 +34,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private long startTick = -1;
         private int current = 0;
         private Signal lengthInMs;
-        private Vector signals = new Vector();
+        private Vector<Signal> signals = new Vector<Signal>();
         
         public double get(long t) {
             if (startTick == -1) {
@@ -47,7 +47,7 @@ public class ArpeggioClass extends DefaultSignalClass {
                     current = 0;
                 }
             }
-            return ((Signal)signals.get(current)).get(t);
+            return signals.get(current).get(t);
         }
 
         private Arpeggio(Signal[] s) {
@@ -64,7 +64,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private long startTick = -1;
         private int current = 0;
         private double lengthInTicks;
-        private Vector signals = new Vector();
+        private Vector<Signal> signals = new Vector<Signal>();
         
         public double get(long t) {
             if (startTick == -1) {
@@ -77,7 +77,7 @@ public class ArpeggioClass extends DefaultSignalClass {
                     current = 0;
                 }
             }
-            return ((Signal)signals.get(current)).get(t);
+            return signals.get(current).get(t);
         }
 
         private ConstantArpeggio(Signal[] s) {

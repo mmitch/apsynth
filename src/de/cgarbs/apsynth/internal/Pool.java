@@ -13,14 +13,14 @@ import de.cgarbs.apsynth.storage.FilesystemStorage;
 
 public class Pool {
 
-    static HashMap signalClassPool = new HashMap();
-    static HashMap instrumentClassPool = new HashMap();
-    static HashMap samplePool = new HashMap();
-    static HashMap registerPool = new HashMap();
-    static Vector trackPool = new Vector();
+    static HashMap<String,SignalClass> signalClassPool = new HashMap<String,SignalClass>();
+    static HashMap<String,InstrumentClass> instrumentClassPool = new HashMap<String,InstrumentClass>();
+    static HashMap<String,Sample> samplePool = new HashMap<String,Sample>();
+    static HashMap<String,Register> registerPool = new HashMap<String,Register>();
+    static Vector<Track> trackPool = new Vector<Track>();
 	
     public static Sample getSample(String name) {
-    	Sample sample = (Sample)samplePool.get(name); 
+    	Sample sample = samplePool.get(name); 
     	if (sample == null) {
     		sample = new FilesystemStorage().readSample(name);
     		samplePool.put(name, sample);
@@ -33,9 +33,9 @@ public class Pool {
     }
     
     public static boolean allTracksFinished() {
-        Iterator i = trackPool.iterator();
+        Iterator<Track> i = trackPool.iterator();
         while (i.hasNext()) {
-            if (! ((Track)i.next()).isFinished()) {
+            if (! i.next().isFinished()) {
                 return false;
             }
         }
@@ -53,7 +53,7 @@ public class Pool {
     }
     
     public static SignalClass getSignalClass(String name) {
-        SignalClass retVal = (SignalClass) signalClassPool.get(name);
+        SignalClass retVal = signalClassPool.get(name);
         if (retVal == null) {
             // TODO add proper exception
             throw new RuntimeException("SignalClass "+name+" not registered in ClassPool");
@@ -73,7 +73,7 @@ public class Pool {
     }
     
     public static InstrumentClass getInstrumentClass(String name) {
-        InstrumentClass retVal = (InstrumentClass) instrumentClassPool.get(name);
+        InstrumentClass retVal = instrumentClassPool.get(name);
         if (retVal == null) {
             // TODO add proper exception
             throw new RuntimeException("InstrumentClass "+name+" not registered in ClassPool");
@@ -83,7 +83,7 @@ public class Pool {
     }
     
     public static Register getRegister(String name) {
-        Register retVal = (Register) registerPool.get(name);
+        Register retVal = registerPool.get(name);
         if (retVal == null) {
             retVal = (Register) getSignalClass("Register").instanciate(new Signal[0]);
             registerRegister(name, retVal);

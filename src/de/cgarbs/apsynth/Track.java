@@ -10,8 +10,8 @@ import de.cgarbs.apsynth.signal.Signal;
 
 public class Track implements Signal {
     
-    Vector activeNotes = new Vector();
-    Map queue = new HashMap();
+    Vector<Note> activeNotes = new Vector<Note>();
+    Map<Long,Vector<Note>> queue = new HashMap<Long,Vector<Note>>();
     
     public Track() {
         Pool.registerTrack(this);
@@ -21,10 +21,10 @@ public class Track implements Signal {
         Long key = new Long(time);
         if (queue.containsKey(key)) {
             // add to existing timecode
-            ((Vector)queue.get(key)).add(note);
+            queue.get(key).add(note);
         } else {
             // create new timecode and add
-            Vector v = new Vector();
+            Vector<Note> v = new Vector<Note>();
             v.add(note);
             queue.put(key, v);
         }
