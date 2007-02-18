@@ -21,6 +21,9 @@ Clipper       clips a signal (s1 in [-s2; s2])
 Constant      a constant value
               1 = the value
 -------------------------------------------------
+DataBlock     an array of data
+              n/a (direct data entry)
+-------------------------------------------------
 DelayEcho     creates a delayed echo
               1 = the signal to echo
               2 = delay buffer size in ms (const.)
@@ -29,6 +32,14 @@ DelayEcho     creates a delayed echo
 -------------------------------------------------
 EndianChanger endian switch distortion
               1 = the original signal
+-------------------------------------------------
+FiniteImpulseResponse
+              a FIR implementation (for filters)
+              1 = signal
+              2 = TAP data
+                  sohuld be a DataBlock with
+                  entry 0: number of taps
+                  other entries: tap values
 -------------------------------------------------
 Mixer         mix two signals (s1+s2)
               1 = signal 1

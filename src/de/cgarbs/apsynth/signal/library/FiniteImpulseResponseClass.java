@@ -8,22 +8,22 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
      * see http://www.dspguru.com/info/faqs/fir/basics.htm for a FAQ on
      * FIR (Finite Impulse Response)
      * 
-     * This implements the "duplicate coefficient" 
+     * This implements the "duplicate coefficient" optimization 
      */
     
 	public FiniteImpulseResponseClass() {
-		this.paramCount = 1;
+		this.paramCount = 2;
 	}
 	
     /**
      * 1: signal
-     * 2: delay buffer size [ms] (const)
-     * 3: amplification
-     * 4: reamplification 
+     * 2: TAP data (should be a DataBlock with
+     *              entry 0: number of taps
+     *              other entries: tap values)
      */    
 	public Signal instanciate(Signal[] s) {
 		checkParams(s);
-		return new FiniteImpulseResponse(s[0]);
+		return new FiniteImpulseResponse(s[0], s[1]);
 	}
 	
 	public String getName() {
@@ -33,18 +33,21 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
     public class FiniteImpulseResponse implements Signal {
 
         private Signal signal = null;
-        private int tapcount = 10; 
+        private int tapcount; 
         private double tap[];
         private double buffer[];
         private int head = 0; 
         
-        private FiniteImpulseResponse(Signal signal) {
+        private FiniteImpulseResponse(Signal signal, Signal data) {
             this.signal = signal;
             this.head = 0;
+            this.tapcount = (int) data.get(0);
             this.tap = new double[tapcount*2];
             this.buffer= new double[tapcount];
+            
+            // fill taps (data is only used in this constructor)
             for (int i=0; i<this.tapcount; i++) {
-                this.tap[i]= (i%2 == 0) ? 0.2 : 0;
+            	tap[i] = data.get(i+1);
             }
             
             // duplicate coefficient table (optimization)
