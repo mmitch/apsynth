@@ -37,9 +37,7 @@ FiniteImpulseResponse
               a FIR implementation (for filters)
               1 = signal
               2 = TAP data
-                  sohuld be a DataBlock with
-                  entry 0: number of taps
-                  other entries: tap values
+                  (must be a DataBlock)
 -------------------------------------------------
 Mixer         mix two signals (s1+s2)
               1 = signal 1

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.library.DataBlockClass.DataBlock;
 
 public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
@@ -17,9 +18,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 	
     /**
      * 1: signal
-     * 2: TAP data (should be a DataBlock with
-     *              entry 0: number of taps
-     *              other entries: tap values)
+     * 2: TAP data (must be a DataBlock!)
      */    
 	public Signal instanciate(Signal[] s) {
 		checkParams(s);
@@ -39,15 +38,20 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
         private int head = 0; 
         
         private FiniteImpulseResponse(Signal signal, Signal data) {
-            this.signal = signal;
+
+        	if (!(data instanceof DataBlock)) {
+                throw new RuntimeException(this.getClass().getName() + " called without DataBlock!");
+        	}
+        	
+        	this.signal = signal;
             this.head = 0;
-            this.tapcount = (int) data.get(0);
+            this.tapcount = ((DataBlock)data).getLength();
             this.tap = new double[tapcount*2];
             this.buffer= new double[tapcount];
             
             // fill taps (data is only used in this constructor)
             for (int i=0; i<this.tapcount; i++) {
-            	tap[i] = data.get(i+1);
+            	tap[i] = data.get(i);
             }
             
             // duplicate coefficient table (optimization)

@@ -12,7 +12,7 @@ public class FIRTest {
         Pool.registerSignalClass(new FiniteImpulseResponseClass());
     	
         DataBlock input = new DataBlock(new double[]{0, 1, 1, 1, 0, 0});
-        DataBlock taps  = new DataBlock(new double[]{3, 0.2, 0.3, 0.4});
+        DataBlock taps  = new DataBlock(new double[]{0.2, 0.3, 0.4});
         
         Signal fir = Pool.getSignalClass("FiniteImpulseResponse").instanciate(new Signal[]{input, taps}); 
 
