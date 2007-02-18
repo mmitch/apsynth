@@ -9,7 +9,7 @@ public class AmplifierClass extends DefaultSignalClass {
 		this.paramCount = 2;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
             return new ConstantAmplifier(s[1], s[0]);

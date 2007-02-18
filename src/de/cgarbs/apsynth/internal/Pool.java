@@ -85,7 +85,7 @@ public class Pool {
     public static Register getRegister(String name) {
         Register retVal = registerPool.get(name);
         if (retVal == null) {
-            retVal = (Register) getSignalClass("Register").instanciate(new Signal[0]);
+            retVal = (Register) getSignalClass("Register").instantiate(new Signal[0]);
             registerRegister(name, retVal);
         }
         return retVal;

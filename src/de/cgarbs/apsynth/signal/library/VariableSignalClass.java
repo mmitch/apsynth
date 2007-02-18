@@ -10,7 +10,7 @@ public class VariableSignalClass extends DefaultSignalClass {
     public VariableSignalClass() {
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         return new VariableSignal();
 	}

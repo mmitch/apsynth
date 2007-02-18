@@ -14,7 +14,7 @@ public class SquineWaveClass extends DefaultSignalClass {
 		this.paramCount = 2;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         if (s[1] instanceof ConstantSignal) {
             return new ConstantSquineWave(s[0], s[1]);
@@ -40,8 +40,8 @@ public class SquineWaveClass extends DefaultSignalClass {
         }
 
         private SquineWave(Signal frequency, Signal sound) {
-            Signal sine  = Pool.getSignalClass("SineWave").instanciate(new Signal[]{frequency});
-            this.clipped = Pool.getSignalClass("Clipper").instanciate(new Signal[]{sine, sound});
+            Signal sine  = Pool.getSignalClass("SineWave").instantiate(new Signal[]{frequency});
+            this.clipped = Pool.getSignalClass("Clipper").instantiate(new Signal[]{sine, sound});
             this.sound   = sound;
         }
 
@@ -57,8 +57,8 @@ public class SquineWaveClass extends DefaultSignalClass {
         }
 
         private ConstantSquineWave(Signal frequency, Signal sound) {
-            Signal sine  = Pool.getSignalClass("SineWave").instanciate(new Signal[]{frequency});
-            this.clipped = Pool.getSignalClass("Clipper").instanciate(new Signal[]{sine, sound});
+            Signal sine  = Pool.getSignalClass("SineWave").instantiate(new Signal[]{frequency});
+            this.clipped = Pool.getSignalClass("Clipper").instantiate(new Signal[]{sine, sound});
             this.div     = sound.get(0);
             if (div != 0) {
                 div = 1/div;

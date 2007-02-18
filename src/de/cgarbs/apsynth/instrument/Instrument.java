@@ -21,7 +21,7 @@ public abstract class Instrument {
         for (int i=0; i<notes.length; i++) {
             freqs[i+1] = ConstantSignalClass.get(NoteConverter.getFrequency(notes[i]));
         }
-        Signal arp = Pool.getSignalClass("Arpeggio").instanciate(freqs);
+        Signal arp = Pool.getSignalClass("Arpeggio").instantiate(freqs);
         return play(arp, length);
     }
     

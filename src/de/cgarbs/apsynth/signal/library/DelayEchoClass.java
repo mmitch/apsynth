@@ -17,7 +17,7 @@ public class DelayEchoClass extends DefaultSignalClass {
      * 3: amplification
      * 4: reamplification 
      */    
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new DelayEcho(s[0], s[1], s[2], s[3]);
 	}

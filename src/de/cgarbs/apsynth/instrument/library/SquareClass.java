@@ -35,7 +35,7 @@ public class SquareClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             return new EnvelopeNote(
-                    Pool.getSignalClass("SquareWave").instanciate(new Signal[]{freq, duty}),
+                    Pool.getSignalClass("SquareWave").instantiate(new Signal[]{freq, duty}),
                             length,
                             env
                             );

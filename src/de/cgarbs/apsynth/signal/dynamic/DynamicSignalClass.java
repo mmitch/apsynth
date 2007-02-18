@@ -18,7 +18,7 @@ public class DynamicSignalClass extends SignalClass {
 		this.rules = rules;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new DynamicSignal(rules, s);
 	}
@@ -45,7 +45,7 @@ public class DynamicSignalClass extends SignalClass {
                     for (short param=0; param<sc.getParamCount(); param++) {
                         params[param] = tmpVars.get(rule.getOperand(param));
                     }
-                    tmpVars.add(sc.instanciate(params));
+                    tmpVars.add(sc.instantiate(params));
 
                 } else if (r[i] instanceof ConstantRule) {
                     ConstantRule rule = (ConstantRule) r[i];

@@ -14,7 +14,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
 		this.paramCount = 1;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
             return new ConstantSawtoothWave(s[0]);

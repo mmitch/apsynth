@@ -14,7 +14,7 @@ public class FIRTest {
         DataBlock input = new DataBlock(new double[]{0, 1, 1, 1, 0, 0});
         DataBlock taps  = new DataBlock(new double[]{0.2, 0.3, 0.4});
         
-        Signal fir = Pool.getSignalClass("FiniteImpulseResponse").instanciate(new Signal[]{input, taps}); 
+        Signal fir = Pool.getSignalClass("FiniteImpulseResponse").instantiate(new Signal[]{input, taps}); 
 
         int length = input.getLength() + taps.getLength();
         

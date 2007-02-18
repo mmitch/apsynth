@@ -10,7 +10,7 @@ public class RegisterClass extends DefaultSignalClass {
 		this.paramCount = 0;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new Register();
 	}

@@ -20,7 +20,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
      * 1: signal
      * 2: TAP data (must be a DataBlock!)
      */    
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new FiniteImpulseResponse(s[0], s[1]);
 	}

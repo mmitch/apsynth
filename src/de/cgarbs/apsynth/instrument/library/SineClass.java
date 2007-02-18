@@ -34,7 +34,7 @@ public class SineClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             return new EnvelopeNote(
-                    Pool.getSignalClass("SineWave").instanciate(new Signal[]{freq}),
+                    Pool.getSignalClass("SineWave").instantiate(new Signal[]{freq}),
                             length,
                             env
                             );

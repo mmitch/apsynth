@@ -35,7 +35,7 @@ public class SquineClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             return new EnvelopeNote(
-                    Pool.getSignalClass("SquineWave").instanciate(new Signal[]{freq, sound}),
+                    Pool.getSignalClass("SquineWave").instantiate(new Signal[]{freq, sound}),
                             length,
                             env
                             );

@@ -11,7 +11,7 @@ public class EndianChangerClass extends DefaultSignalClass {
     /**
      * 1: signal
      */
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new EndianChanger(s[0]);
 	}

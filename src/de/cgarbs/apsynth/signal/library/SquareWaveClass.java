@@ -14,7 +14,7 @@ public class SquareWaveClass extends DefaultSignalClass {
 		this.paramCount = 2;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new SquareWave(s[0], s[1]);
 	}

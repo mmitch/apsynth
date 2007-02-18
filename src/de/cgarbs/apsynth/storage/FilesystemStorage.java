@@ -443,7 +443,7 @@ public class FilesystemStorage implements StorageBackend {
 		for (int i=0; i<paramCount; i++) {
 			parameters[i] = parseSignalParameter(signals, token[i+offset]);
 		}
-		signal = filterClass.instanciate(parameters);
+		signal = filterClass.instantiate(parameters);
 		return signal;
 	}
 	

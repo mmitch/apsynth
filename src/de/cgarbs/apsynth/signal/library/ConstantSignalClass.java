@@ -13,7 +13,7 @@ public class ConstantSignalClass extends DefaultSignalClass {
 		this.paramCount = 1;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		// ugly, but the class has to wrap itself somehow...
 		return instanciate(s[0].get(0));
@@ -36,7 +36,7 @@ public class ConstantSignalClass extends DefaultSignalClass {
     private static ConstantSignalClass csc = new ConstantSignalClass();
     
     public static Signal get(Signal[] s) {
-        return csc.instanciate(s);
+        return csc.instantiate(s);
     }
 
     public static Signal get(double value) {

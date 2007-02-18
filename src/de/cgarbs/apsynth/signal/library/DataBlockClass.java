@@ -12,7 +12,7 @@ public class DataBlockClass extends DefaultSignalClass {
 	
     /**
      */    
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
 		return new DataBlock();
 	}

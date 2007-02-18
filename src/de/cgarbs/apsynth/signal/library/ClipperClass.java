@@ -13,7 +13,7 @@ public class ClipperClass extends DefaultSignalClass {
 		this.paramCount = 2;
 	}
 	
-	public Signal instanciate(Signal[] s) {
+	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         if (s[1] instanceof ConstantSignal) {
             return new ConstantClipper(s[0], s[1]);

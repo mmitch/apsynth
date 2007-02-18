@@ -34,7 +34,7 @@ public class SawtoothClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             return new EnvelopeNote(
-                    Pool.getSignalClass("SawtoothWave").instanciate(new Signal[]{freq}),
+                    Pool.getSignalClass("SawtoothWave").instantiate(new Signal[]{freq}),
                     length,
                     env
                     );

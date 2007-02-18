@@ -29,7 +29,7 @@ public class NullClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             return new Note(
-                    Pool.getSignalClass("Null").instanciate(new Signal[]{}),
+                    Pool.getSignalClass("Null").instantiate(new Signal[]{}),
                     0
                             );
         }
