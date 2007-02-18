@@ -23,6 +23,7 @@ import de.cgarbs.apsynth.signal.dynamic.DynamicSignalClass;
 import de.cgarbs.apsynth.signal.dynamic.SignalRule;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass;
 import de.cgarbs.apsynth.signal.library.RegisterClass;
+import de.cgarbs.apsynth.signal.library.DataBlockClass.DataBlock;
 
 public class FilesystemStorage implements StorageBackend {
 
@@ -83,7 +84,7 @@ public class FilesystemStorage implements StorageBackend {
 		            		SignalClass filterClass = Pool.getSignalClass(signalName);
 	            			int paramCount = filterClass.getParamCount();
 	            			if (paramCount != token.length-2) {
-	            				throw new ParseException("wrong argument count for SignalClass");
+	            				throw new ParseException("wrong argument count for SignalClass " + signalName);
 	            			}
 	            			
 	            			short[] parameters = new short[paramCount];
@@ -428,9 +429,15 @@ public class FilesystemStorage implements StorageBackend {
 	private Signal parseSignalLine(HashMap<String,Signal> signals, String[] token, int offset, String name) throws ParseException {
 		Signal signal;
 		SignalClass filterClass = Pool.getSignalClass(name);
+		
+		// corner case!  special handling required!
+		if (name.equals("DataBlock")) {
+			return parseDataBlock(token, offset);
+		}
+		
 		int paramCount = filterClass.getParamCount();
 		if (paramCount != token.length-offset) {
-			throw new ParseException("wrong argument count for SignalClass");
+			throw new ParseException("wrong argument count for SignalClass "+name);
 		}
 		Signal[] parameters = new Signal[paramCount];
 		for (int i=0; i<paramCount; i++) {
@@ -438,6 +445,26 @@ public class FilesystemStorage implements StorageBackend {
 		}
 		signal = filterClass.instanciate(parameters);
 		return signal;
+	}
+	
+	/**
+	 * generate a DataBlock from a line in a file
+	 * @param token array of tokens to be parsed
+	 * @param offset first token to be parsed that contains a parameter to the SignalClass
+	 * @return the new DataBlock
+	 * @throws ParseException something went wrong
+	 */
+	private Signal parseDataBlock(String[] token, int offset) throws ParseException {
+		DataBlock db = new DataBlock();
+		for (int i=offset; i<token.length; i++) {
+			try {
+				db.add(Double.parseDouble(token[i]));
+			}
+			catch (NumberFormatException e) {
+				throw new ParseException("DataBlock parameter "+(i-offset)+" is not numeric");
+			}
+		}
+		return db;
 	}
 
 	/**

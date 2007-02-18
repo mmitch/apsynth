@@ -43,7 +43,8 @@ echo_b	DelayEcho	amp_b	250	0.4	R_EchoReAmp
 mix	Mixer	echo_l	echo_b
 *
 * test FIR
-fir		FiniteImpulseResponse mix
+taps	DataBlock 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1
+fir		FiniteImpulseResponse mix taps
 *
 * Write to disk
 return	fir	/tmp/test.wav
