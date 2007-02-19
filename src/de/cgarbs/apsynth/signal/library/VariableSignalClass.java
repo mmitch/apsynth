@@ -19,7 +19,7 @@ public class VariableSignalClass extends DefaultSignalClass {
 		return "Variable";
 	}
 
-    public class VariableSignal implements Signal {
+    public static class VariableSignal implements Signal {
         
         private IntervalArray val = new IntervalArray1();
 

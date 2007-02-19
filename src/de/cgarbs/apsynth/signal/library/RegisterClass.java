@@ -19,7 +19,7 @@ public class RegisterClass extends DefaultSignalClass {
 		return "Register";
 	}
 
-    public class Register implements Signal {
+    public static class Register implements Signal {
 
         IntervalArray ary = new IntervalArray1();
         

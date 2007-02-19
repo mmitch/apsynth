@@ -23,7 +23,7 @@ public class SquareWaveClass extends DefaultSignalClass {
 		return "SquareWave";
 	}
 
-    public class SquareWave implements Signal {
+    public static class SquareWave implements Signal {
 
         private Signal frequency = null;
         private Signal duty = null;  // 0..1

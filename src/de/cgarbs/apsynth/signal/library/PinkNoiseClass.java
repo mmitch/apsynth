@@ -17,7 +17,7 @@ public class PinkNoiseClass extends DefaultSignalClass {
 		return "PinkNoise";
 	}
 
-    public class PinkNoise implements Signal {
+    public static class PinkNoise implements Signal {
 
     	// see http://www.firstpr.com.au/dsp/pink-noise/ for background information
     	

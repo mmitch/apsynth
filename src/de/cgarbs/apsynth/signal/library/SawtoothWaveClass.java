@@ -26,7 +26,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
 		return "SawtoothWave";
 	}
 
-    public class SawtoothWave implements Signal {
+    public static class SawtoothWave implements Signal {
 
         private Signal frequency = null;
       //private double lastFreq = 0;

@@ -43,7 +43,7 @@ public class ConstantSignalClass extends DefaultSignalClass {
         return csc.instanciate(value);
     }
 
-    public class ConstantSignal implements Signal {
+    public static class ConstantSignal implements Signal {
         
         private double value = 0;
 

@@ -26,7 +26,7 @@ public class DelayEchoClass extends DefaultSignalClass {
 		return "DelayEcho";
 	}
 
-    public class DelayEcho implements Signal {
+    public static class DelayEcho implements Signal {
 
         private Signal signal = null;
         private int delay = 0;

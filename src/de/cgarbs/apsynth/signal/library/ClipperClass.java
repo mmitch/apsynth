@@ -25,7 +25,7 @@ public class ClipperClass extends DefaultSignalClass {
 		return "Clipper";
 	}
 
-    public class Clipper implements Signal {
+    public static class Clipper implements Signal {
 
         private Signal signal;
         private Signal clip;

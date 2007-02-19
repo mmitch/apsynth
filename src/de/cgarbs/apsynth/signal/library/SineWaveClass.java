@@ -25,7 +25,7 @@ public class SineWaveClass extends DefaultSignalClass {
 		return "SineWave";
 	}
 
-    public class SineWave implements Signal {
+    public static class SineWave implements Signal {
 
         private Signal frequency = null;
         private double lastFreq = 0;

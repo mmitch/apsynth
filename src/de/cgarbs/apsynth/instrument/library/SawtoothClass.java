@@ -24,7 +24,7 @@ public class SawtoothClass extends DefaultInstrumentClass {
         return new Sawtooth();
     }
 
-    public class Sawtooth extends Instrument {
+    public static class Sawtooth extends Instrument {
 
         private Envelope env = new ADSREnvelope(0, 0, 1, 100);
         

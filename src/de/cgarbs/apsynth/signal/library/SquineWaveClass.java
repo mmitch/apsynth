@@ -26,7 +26,7 @@ public class SquineWaveClass extends DefaultSignalClass {
 		return "SquineWave";
 	}
 
-    public class SquineWave implements Signal {
+    public static class SquineWave implements Signal {
 
         private Signal clipped = null;
         private Signal sound = null;

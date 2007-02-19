@@ -24,7 +24,7 @@ public class SquineClass extends DefaultInstrumentClass {
         return new Square(s[0]);
     }
 
-    public class Square extends Instrument {
+    public static class Square extends Instrument {
 
         private Envelope env = new ADSREnvelope(0, 0, 1, 100);
         private Signal sound = null;

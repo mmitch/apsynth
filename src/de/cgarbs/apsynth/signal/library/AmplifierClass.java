@@ -23,7 +23,7 @@ public class AmplifierClass extends DefaultSignalClass {
 		return "Amplifier";
 	}
 
-    public class Amplifier implements Signal {
+    public static class Amplifier implements Signal {
 
         private Signal s1;
         private Signal s2;

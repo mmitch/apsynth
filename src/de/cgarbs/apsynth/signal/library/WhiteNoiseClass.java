@@ -17,7 +17,7 @@ public class WhiteNoiseClass extends DefaultSignalClass {
 		return "WhiteNoise";
 	}
 
-    public class WhiteNoise implements Signal {
+    public static class WhiteNoise implements Signal {
 
         private WhiteNoise () {
             // no-op: no parameters 

@@ -27,7 +27,7 @@ public class DynamicSignalClass extends SignalClass {
 		return name;
 	}
     
-    public class DynamicSignal implements Signal {
+    public static class DynamicSignal implements Signal {
 
         private Signal lastVar;
 

@@ -17,7 +17,7 @@ public class NullClass extends DefaultSignalClass {
 		return "Null";
 	}
 
-    public class Null implements Signal {
+    public static class Null implements Signal {
 
         private Null () {
             // no-op: no parameters 

@@ -19,7 +19,7 @@ public class QuantizerClass extends DefaultSignalClass {
 		return "Quantizer";
 	}
 
-    public class Quantizer implements Signal {
+    public static class Quantizer implements Signal {
 
         private Signal signal;
         private Signal quant;

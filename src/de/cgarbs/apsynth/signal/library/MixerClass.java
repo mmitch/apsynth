@@ -24,7 +24,7 @@ public class MixerClass extends DefaultSignalClass {
 		return "Mixer";
 	}
 
-    public class Mixer implements Signal {
+    public static class Mixer implements Signal {
 
         private Signal s1;
         private Signal s2;

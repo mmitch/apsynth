@@ -29,7 +29,7 @@ public class ArpeggioClass extends DefaultSignalClass {
 		return "Arpeggio";
 	}
 
-    public class Arpeggio implements Signal {
+    public static class Arpeggio implements Signal {
 
         private long startTick = -1;
         private int current = 0;

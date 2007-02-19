@@ -21,7 +21,7 @@ public class NullClass extends DefaultInstrumentClass {
         return new Null();
     }
 
-    public class Null extends Instrument {
+    public static class Null extends Instrument {
 
         private Null() {
             // no-op: no parameters 

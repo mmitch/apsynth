@@ -504,7 +504,7 @@ public class FilesystemStorage implements StorageBackend {
 		}
 	}
 	
-	private class ParseException extends Exception {
+	private static class ParseException extends Exception {
 		
 		ParseException(String message) {
 			super(message);

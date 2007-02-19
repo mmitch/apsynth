@@ -20,7 +20,7 @@ public class EndianChangerClass extends DefaultSignalClass {
 		return "EndianChanger";
 	}
 
-    public class EndianChanger implements Signal {
+    public static class EndianChanger implements Signal {
 
         private Signal signal = null;
 

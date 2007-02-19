@@ -29,7 +29,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 		return "FiniteImpulseResponse";
 	}
 
-    public class FiniteImpulseResponse implements Signal {
+    public static class FiniteImpulseResponse implements Signal {
 
         private Signal signal = null;
         private int tapcount; 
