@@ -15,6 +15,7 @@ import de.cgarbs.apsynth.signal.library.DataBlockClass;
 import de.cgarbs.apsynth.signal.library.DelayEchoClass;
 import de.cgarbs.apsynth.signal.library.EndianChangerClass;
 import de.cgarbs.apsynth.signal.library.FiniteImpulseResponseClass;
+import de.cgarbs.apsynth.signal.library.HighPassClass;
 import de.cgarbs.apsynth.signal.library.MixerClass;
 import de.cgarbs.apsynth.signal.library.PinkNoiseClass;
 import de.cgarbs.apsynth.signal.library.QuantizerClass;
@@ -52,6 +53,7 @@ public class Apsynth {
         Pool.registerSignalClass(new ArpeggioClass());
         Pool.registerSignalClass(new FiniteImpulseResponseClass());
         Pool.registerSignalClass(new DataBlockClass());
+        Pool.registerSignalClass(new HighPassClass());
 
         Pool.registerInstrumentClass(new SineClass());
         Pool.registerInstrumentClass(new SquareClass());

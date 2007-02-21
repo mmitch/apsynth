@@ -24,6 +24,11 @@ public class RemezFIRFilter {
    *************************************************************************/
 
   /* Converted to Java by Iain A Robin, June 1998 */
+    
+  /* changes by Christian Garbs <mitch@cgarbs.de>:
+   * 2007/02/21:
+   * - enable public access to remez() function
+   */
 
   public static final int BANDPASS       = 1;
   public static final int DIFFERENTIATOR = 2;
@@ -463,7 +468,7 @@ public class RemezFIRFilter {
    * double[] h       - Impulse response of final filter [numtaps]
    ********************/
 
-  double[] remez(int n,
+  public double[] remez(int n,
                double bands[], double des[], double weight[], int type) {
 
     double c;
