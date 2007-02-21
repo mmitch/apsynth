@@ -2,6 +2,7 @@ package de.cgarbs.apsynth;
 
 import java.util.Date;
 
+import de.cgarbs.apsynth.instrument.library.HiHatClass;
 import de.cgarbs.apsynth.instrument.library.SawtoothClass;
 import de.cgarbs.apsynth.instrument.library.SineClass;
 import de.cgarbs.apsynth.instrument.library.SquareClass;
@@ -16,6 +17,7 @@ import de.cgarbs.apsynth.signal.library.DelayEchoClass;
 import de.cgarbs.apsynth.signal.library.EndianChangerClass;
 import de.cgarbs.apsynth.signal.library.FiniteImpulseResponseClass;
 import de.cgarbs.apsynth.signal.library.HighPassClass;
+import de.cgarbs.apsynth.signal.library.LowPassClass;
 import de.cgarbs.apsynth.signal.library.MixerClass;
 import de.cgarbs.apsynth.signal.library.PinkNoiseClass;
 import de.cgarbs.apsynth.signal.library.QuantizerClass;
@@ -54,12 +56,14 @@ public class Apsynth {
         Pool.registerSignalClass(new FiniteImpulseResponseClass());
         Pool.registerSignalClass(new DataBlockClass());
         Pool.registerSignalClass(new HighPassClass());
+        Pool.registerSignalClass(new LowPassClass());
 
         Pool.registerInstrumentClass(new SineClass());
         Pool.registerInstrumentClass(new SquareClass());
         Pool.registerInstrumentClass(new SquineClass());
         Pool.registerInstrumentClass(new SawtoothClass());
         Pool.registerInstrumentClass(new de.cgarbs.apsynth.instrument.library.NullClass());
+        Pool.registerInstrumentClass(new HiHatClass());
         
     }
 

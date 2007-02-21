@@ -46,6 +46,13 @@ HighPass      a high pass band filter
               4 = stopband attenuation [dB]
               5 = passband ripple [dB]
 -------------------------------------------------
+LowPass       a low pass band filter
+              1 = input signal
+              2 = cutoff frequency [Hz]
+              3 = transition bandwidth [Hz]
+              4 = stopband attenuation [dB]
+              5 = passband ripple [dB]
+-------------------------------------------------
 Mixer         mix two signals (s1+s2)
               1 = signal 1
               2 = signal 2
