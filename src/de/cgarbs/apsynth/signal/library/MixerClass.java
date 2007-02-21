@@ -12,7 +12,11 @@ public class MixerClass extends DefaultSignalClass {
 	public Signal instantiate(Signal[] s) {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
-            return new ConstantMixer(s[1], s[0]);
+            if (s[1] instanceof ConstantSignal) {
+                return ConstantSignalClass.get(s[0].get(0)+s[1].get(1));
+            } else {
+                return new ConstantMixer(s[1], s[0]);
+            }
         } else if (s[1] instanceof ConstantSignal) {
             return new ConstantMixer(s[0], s[1]);
 
