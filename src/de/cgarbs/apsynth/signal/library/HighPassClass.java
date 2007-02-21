@@ -77,11 +77,11 @@ public class HighPassClass extends DefaultSignalClass {
             weights[0] = rippleRatio;
             weights[1] = 1.0;
 
-            if (bands[1] > bands[2]) {
-                bands[1] = bands[2];
-            }
             if (bands[2] > bands[3]) {
                 bands[2] = bands[3];
+            }
+            if (bands[1] > bands[2]) {
+                bands[1] = bands[2];
             }
             
             int numTaps = (int)Math.round((-10.0d*(Math.log(deltaP*deltaS)/Math.log(10.0d)) - 13)/(14.6d*trband));
