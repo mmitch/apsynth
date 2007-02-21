@@ -13,7 +13,7 @@ public class MixerClass extends DefaultSignalClass {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
             if (s[1] instanceof ConstantSignal) {
-                return ConstantSignalClass.get(s[0].get(0)+s[1].get(1));
+                return ConstantSignalClass.get(s[0].get(0)+s[1].get(0));
             } else {
                 return new ConstantMixer(s[1], s[0]);
             }
