@@ -143,15 +143,21 @@ public class FilesystemStorage implements StorageBackend {
     }
 
     public Track readTrack(String filename) {
-        Track track = new Track();
+
+    	Track track = new Track();
+        
+        readTrackRecursive(filename, track, 0, Pool.getInstrumentClass("Null").instanciate(new Signal[]{}), Apsynth.samplefreq * 60 / 120);
+        
+        return track;
+    }
+    
+    public double readTrackRecursive(String filename, Track track, double startPosition, Instrument instrument, double step) {
+        
+        double position = startPosition;
         
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
-            
-            Instrument instrument = Pool.getInstrumentClass("Null").instanciate(new Signal[]{});
-            double step = Apsynth.samplefreq * 60 / 120;
-            double position = 0;
-            
+
             HashMap<String,Signal> signals = new HashMap<String,Signal>();
             String line;
             int lineNumber = 0;
@@ -170,7 +176,14 @@ public class FilesystemStorage implements StorageBackend {
 	                    // comment line
 	                    } else if (token[0].equals("*")) {
 	                        c = commands.length;  // skip remaining line
-	
+
+	                    // include other file
+	                    } else if (token[0].equals("include")) {
+	                    	if (token.length < 2) {
+	                    		throw new ParseException("too few arguments in include statement");
+	                    	}
+	                    	position += readTrackRecursive(token[1], track, position, instrument, step) - step;
+	                        
 	                    // change instrument
 	                    } else if (token[0].equals("instrument")) {
 	                    	if (token.length < 2) {
@@ -227,7 +240,7 @@ public class FilesystemStorage implements StorageBackend {
                             
                             
 	                    // play note
-	                    } else {
+	                    } else if (token.length == 2) {
 	                        Note note = instrument.play(token[0], (long)(Double.parseDouble(token[1]) * step));
 	                        track.queueNote(note, (long)position);
 	                        
@@ -244,13 +257,15 @@ public class FilesystemStorage implements StorageBackend {
             
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
+        	System.err.println("file: "+filename);
             e.printStackTrace();
         } catch (IOException e) {
+        	System.err.println("file: "+filename);
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        return track;
+        return (position - startPosition);
     }
 
     public Sample readSample(String identifier) {
