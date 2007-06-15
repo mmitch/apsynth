@@ -1,0 +1,4 @@
+speed 0;* don't wait on comments ^_^
+instrument Sawtooth; speed 320
+include	lastninja.track.pattern.pause
+include	lastninja.track.pan-flute.pattern.00
