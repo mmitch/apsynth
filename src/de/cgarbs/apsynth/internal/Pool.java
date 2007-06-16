@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import de.cgarbs.apsynth.Sample;
 import de.cgarbs.apsynth.Track;
+import de.cgarbs.apsynth.envelope.EnvelopeClass;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
@@ -15,6 +16,7 @@ public class Pool {
 
     static HashMap<String,SignalClass> signalClassPool = new HashMap<String,SignalClass>();
     static HashMap<String,InstrumentClass> instrumentClassPool = new HashMap<String,InstrumentClass>();
+    static HashMap<String,EnvelopeClass> envelopeClassPool = new HashMap<String,EnvelopeClass>();
     static HashMap<String,Sample> samplePool = new HashMap<String,Sample>();
     static HashMap<String,Register> registerPool = new HashMap<String,Register>();
     static Vector<Track> trackPool = new Vector<Track>();
@@ -52,11 +54,31 @@ public class Pool {
         
     }
     
+    public static void registerEnvelopeClass(EnvelopeClass ec) {
+
+        if ( envelopeClassPool.get(ec.getName()) != null) {
+            // TODO add proper exception
+            throw new RuntimeException("EnvelopeClass "+ec.getName()+" registered twice at ClassPool");
+        }
+        envelopeClassPool.put(ec.getName(), ec);
+        
+    }
+    
     public static SignalClass getSignalClass(String name) {
         SignalClass retVal = signalClassPool.get(name);
         if (retVal == null) {
             // TODO add proper exception
             throw new RuntimeException("SignalClass "+name+" not registered in ClassPool");
+        }
+        return retVal;
+        
+    }
+
+    public static EnvelopeClass getEnvelopeClass(String name) {
+        EnvelopeClass retVal = envelopeClassPool.get(name);
+        if (retVal == null) {
+            // TODO add proper exception
+            throw new RuntimeException("EnvelopeClass "+name+" not registered in ClassPool");
         }
         return retVal;
         
