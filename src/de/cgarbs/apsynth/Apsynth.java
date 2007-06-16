@@ -98,7 +98,7 @@ public class Apsynth {
                 if (tick % samplefreq == 0) {
                     timestamp(tick);
                 }
-}
+            }
         } while (! Pool.allTracksFinished());
         
         // wait for 0.5s pause
