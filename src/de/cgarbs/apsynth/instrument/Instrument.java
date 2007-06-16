@@ -1,8 +1,8 @@
 package de.cgarbs.apsynth.instrument;
 
-import de.cgarbs.apsynth.Note;
-import de.cgarbs.apsynth.NoteConverter;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.Note;
+import de.cgarbs.apsynth.note.NoteConverter;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass;
 

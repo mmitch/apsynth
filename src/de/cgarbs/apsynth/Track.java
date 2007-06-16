@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 
 public class Track implements Signal {

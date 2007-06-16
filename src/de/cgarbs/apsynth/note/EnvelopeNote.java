@@ -1,4 +1,4 @@
-package de.cgarbs.apsynth;
+package de.cgarbs.apsynth.note;
 
 import de.cgarbs.apsynth.envelope.Envelope;
 import de.cgarbs.apsynth.signal.Signal;

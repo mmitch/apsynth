@@ -1,11 +1,11 @@
 package de.cgarbs.apsynth.instrument.dynamic;
 
-import de.cgarbs.apsynth.EnvelopeNote;
-import de.cgarbs.apsynth.Note;
 import de.cgarbs.apsynth.envelope.Envelope;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.EnvelopeNote;
+import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
 

@@ -1,4 +1,4 @@
-package de.cgarbs.apsynth;
+package de.cgarbs.apsynth.note;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import de.cgarbs.apsynth.Apsynth;
-import de.cgarbs.apsynth.Note;
 import de.cgarbs.apsynth.Rule;
 import de.cgarbs.apsynth.Sample;
 import de.cgarbs.apsynth.Track;
@@ -18,6 +17,7 @@ import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.instrument.dynamic.DynamicInstrumentClass;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
 import de.cgarbs.apsynth.signal.dynamic.ConstantRule;
