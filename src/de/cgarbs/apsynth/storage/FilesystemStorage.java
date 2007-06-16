@@ -13,8 +13,10 @@ import de.cgarbs.apsynth.Rule;
 import de.cgarbs.apsynth.Sample;
 import de.cgarbs.apsynth.Track;
 import de.cgarbs.apsynth.WaveWriter;
+import de.cgarbs.apsynth.envelope.Envelope;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
+import de.cgarbs.apsynth.instrument.dynamic.DynamicInstrumentClass;
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
@@ -203,15 +205,23 @@ public class FilesystemStorage implements StorageBackend {
 	                        instrument = instrumentClass.instanciate(instrumentSignals);
 	                        // TODO error checking
 	
-	                    // define a signal
-	                    } else if (token[0].equals("signal")) {
-	                    	if (token.length < 3) {
-	                    		throw new ParseException("too few arguments in signal definition");
-	                    	}
-	                    	String signalName = token[1];
-	                    	Signal signal = parseSignalLine(signals, token, 3, token[2]);
-	                    	signals.put(signalName, signal);
-	                    	
+                        // define a signal
+                        } else if (token[0].equals("signal")) {
+                            if (token.length < 3) {
+                                throw new ParseException("too few arguments in signal definition");
+                            }
+                            String signalName = token[1];
+                            Signal signal = parseSignalLine(signals, token, 3, token[2]);
+                            signals.put(signalName, signal);
+                            
+                        // define an instrument
+                        } else if (token[0].equals("newinstrument")) {
+                            if (token.length < 3) {
+                                throw new ParseException("too few arguments in instrument definition");
+                            }
+                            Pool.registerInstrumentClass( parseInstrumentLine(token, 1) );
+
+                            
 	                    // change speed
 	                    } else if (token[0].equals("speed")) {
                             double d = Double.parseDouble(token[1]);
@@ -481,6 +491,21 @@ public class FilesystemStorage implements StorageBackend {
 		}
 		return db;
 	}
+
+    /**
+     * Transform an instrument definition into a new DynamicInstrumentClass
+     * @param token array of tokens to be parsed
+     * @param offset first token to be parsed that contains the name of the instrument
+     * @return the new InstrumentClass
+     * // @ throws ParseException something went wrong
+     */
+    private InstrumentClass parseInstrumentLine(String[] token, int offset) {
+        // TODO: add Envelope support
+        return new DynamicInstrumentClass(token[offset],
+                token[offset+1],
+                (Envelope)null
+                );
+    }
 
 	/**
 	 * Transform a parameter string into a signal
