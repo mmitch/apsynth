@@ -13,6 +13,7 @@ import de.cgarbs.apsynth.Sample;
 import de.cgarbs.apsynth.Track;
 import de.cgarbs.apsynth.WaveWriter;
 import de.cgarbs.apsynth.envelope.Envelope;
+import de.cgarbs.apsynth.envelope.EnvelopeClass;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.instrument.dynamic.DynamicInstrumentClass;
@@ -219,7 +220,7 @@ public class FilesystemStorage implements StorageBackend {
                             if (token.length < 3) {
                                 throw new ParseException("too few arguments in instrument definition");
                             }
-                            Pool.registerInstrumentClass( parseInstrumentLine(token, 1) );
+                            Pool.registerInstrumentClass( parseInstrumentLine(signals, token, 1) );
 
                             
 	                    // change speed
@@ -444,7 +445,7 @@ public class FilesystemStorage implements StorageBackend {
 
 	/**
 	 * generate a Signal from a line in a file
-	 * @param signals HashMap containing all currently known signals
+     * @param signals HashMap containing all currently known signals
 	 * @param token array of tokens to be parsed
 	 * @param offset first token to be parsed that contains a parameter to the SignalClass
 	 * @param name SignalClass name
@@ -460,10 +461,10 @@ public class FilesystemStorage implements StorageBackend {
 			return parseDataBlock(token, offset);
 		}
 		
-		int paramCount = filterClass.getParamCount();
-		if (paramCount != token.length-offset) {
-			throw new ParseException("wrong argument count for SignalClass "+name);
-		}
+        int paramCount = filterClass.getParamCount();
+        if (paramCount != token.length-offset) {
+            throw new ParseException("wrong argument count for SignalClass "+name);
+        }
 		Signal[] parameters = new Signal[paramCount];
 		for (int i=0; i<paramCount; i++) {
 			parameters[i] = parseSignalParameter(signals, token[i+offset]);
@@ -494,17 +495,45 @@ public class FilesystemStorage implements StorageBackend {
 
     /**
      * Transform an instrument definition into a new DynamicInstrumentClass
+     * @param signals HashMap containing all currently known signals
      * @param token array of tokens to be parsed
      * @param offset first token to be parsed that contains the name of the instrument
      * @return the new InstrumentClass
-     * // @ throws ParseException something went wrong
+     * @throws ParseException something went wrong
      */
-    private InstrumentClass parseInstrumentLine(String[] token, int offset) {
-        // TODO: add Envelope support
-        return new DynamicInstrumentClass(token[offset],
-                token[offset+1],
-                (Envelope)null
-                );
+    private InstrumentClass parseInstrumentLine(HashMap<String,Signal> signals, String[] token, int offset) throws ParseException {
+        String instrumentName = token[offset];
+        String signalName = token[offset+1];
+        if (token.length == offset + 1) {
+            // no envelope
+            return new DynamicInstrumentClass(
+                    instrumentName,
+                    signalName,
+                    (Envelope)null
+                    );
+        } else {
+            // with envelope
+
+            offset += 2; // set new offset, saves some calculations
+            
+            EnvelopeClass envelopeClass = Pool.getEnvelopeClass( token[offset] );
+            
+            int paramCount = envelopeClass.getParamCount();
+            if (paramCount != token.length - offset) {
+                throw new ParseException("wrong argument count in envelope at Instrument definition "+instrumentName);
+            }
+            
+            Signal parameters[] = new Signal[paramCount];
+            for (int i=0; i< paramCount; i++) {
+                parameters[i] = parseSignalParameter(signals, token[i + offset]);
+            }
+
+            return new DynamicInstrumentClass(
+                    instrumentName,
+                    signalName,
+                    envelopeClass.instanciate(parameters)
+                    );
+        }
     }
 
 	/**
