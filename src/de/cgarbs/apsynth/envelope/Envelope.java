@@ -1,4 +1,4 @@
-package de.cgarbs.apsynth;
+package de.cgarbs.apsynth.envelope;
 
 public interface Envelope {
     

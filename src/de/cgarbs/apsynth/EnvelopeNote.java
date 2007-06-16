@@ -1,5 +1,6 @@
 package de.cgarbs.apsynth;
 
+import de.cgarbs.apsynth.envelope.Envelope;
 import de.cgarbs.apsynth.signal.Signal;
 
 public class EnvelopeNote extends Note {

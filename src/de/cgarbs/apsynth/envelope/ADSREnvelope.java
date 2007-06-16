@@ -1,4 +1,4 @@
-package de.cgarbs.apsynth;
+package de.cgarbs.apsynth.envelope;
 
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass;
