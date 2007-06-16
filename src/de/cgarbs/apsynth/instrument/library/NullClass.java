@@ -1,7 +1,6 @@
 package de.cgarbs.apsynth.instrument.library;
 
 import de.cgarbs.apsynth.Note;
-import de.cgarbs.apsynth.instrument.DefaultInstrumentClass;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.signal.Signal;

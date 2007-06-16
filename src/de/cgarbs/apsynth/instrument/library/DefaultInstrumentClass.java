@@ -1,4 +1,4 @@
-package de.cgarbs.apsynth.instrument;
+package de.cgarbs.apsynth.instrument.library;
 
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 
