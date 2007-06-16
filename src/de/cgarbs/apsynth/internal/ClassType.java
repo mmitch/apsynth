@@ -16,7 +16,7 @@ public abstract class ClassType {
     protected void checkMinParams(Signal[] s) {
         if (s.length < this.paramCount ) {
             // TODO throw proper exception
-            throw new RuntimeException(getType()+" "+getName()+" needs "+paramCount+" parameters, but got "+s.length);
+            throw new RuntimeException(getType()+" "+getName()+" needs at least "+paramCount+" parameters, but got "+s.length);
         }
     }
     
