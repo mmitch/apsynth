@@ -25,11 +25,17 @@ public class DynamicInstrumentClass extends InstrumentClass {
         return new DynamicInstrument(Pool.getSignalClass(signal), s, this.env);
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
     
+    @Override
+    public int getParamCount() {
+        return Pool.getSignalClass(signal).getParamCount() - 1;
+    }
+
+
+
     public class DynamicInstrument extends Instrument {
 
         private SignalClass signalClass = null;
@@ -44,7 +50,8 @@ public class DynamicInstrumentClass extends InstrumentClass {
         
         public Note play(Signal freq, long length) {
             
-            Signal[] signals = {freq};
+            Signal[] signals = new Signal[s.length + 1];
+            signals[0] = freq;
             for (int i=0; i<s.length ;i++) {
                 signals[i+1] = s[i];
             }
