@@ -72,7 +72,7 @@ public class Apsynth {
 
     public static void printInfo() {
     	System.out.println("Apsynth prerelease");
-    	System.out.println("2006 (c) by Christian Garbs <mitch@cgarbs.de>");
+    	System.out.println("2006-2007 (c) by Christian Garbs <mitch@cgarbs.de>");
     	System.out.println("Licensed under GNU GPL");
     	System.out.println("");
     	System.out.println("Call with project file as first parameter");
