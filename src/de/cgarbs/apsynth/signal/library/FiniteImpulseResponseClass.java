@@ -33,21 +33,27 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
         private Signal signal = null;
         private int tapcount; 
+        private int oldtapcount = -1;
         private double tap[];
         private double buffer[];
-        private int head = 0; 
+        private int head; 
         
-        private FiniteImpulseResponse(Signal signal, Signal data) {
+        public FiniteImpulseResponse(Signal signal, Signal data) {
 
+        	this.signal = signal;
+            this.head = 0;
+        	updateTaps(data);
+            
+        }
+
+        public void updateTaps(Signal data) {
+            	
         	if (!(data instanceof DataBlock)) {
                 throw new RuntimeException(this.getClass().getName() + " called without DataBlock!");
         	}
         	
-        	this.signal = signal;
-            this.head = 0;
             this.tapcount = ((DataBlock)data).getLength();
             this.tap = new double[tapcount*2];
-            this.buffer= new double[tapcount];
             
             // fill taps (data is only used in this constructor)
             for (int i=0; i<this.tapcount; i++) {
@@ -58,8 +64,23 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             for (int i=0, j=this.tapcount; i<this.tapcount; i++,j++) {
                 this.tap[j] = this.tap[i];
             }
-        }
 
+            if (oldtapcount < tapcount) {
+            	double[] newBuffer = new double[tapcount];
+            	for (int i=0; i<oldtapcount; i++) {
+            		newBuffer[i] = buffer[i];
+            	}
+            	this.buffer = newBuffer;
+            } else if (oldtapcount > tapcount) {
+            	double[] newBuffer = new double[tapcount];
+            	for (int i=0; i<tapcount; i++) {
+            		newBuffer[i] = buffer[i];
+            	}
+            	this.buffer = newBuffer;
+            }
+
+        }
+        
         public double get(long tick) {
 
             // store new signal in ringbuffer
