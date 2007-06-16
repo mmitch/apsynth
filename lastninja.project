@@ -1,34 +1,9 @@
-* This is the main Apsynth project definition file.
-* ----------------------------------------------------------------
-* Comments are started with "* ".
-* Tokens are separated by whitespace(s).
-*
-* Every line in the form
-* <name>  <SignalClass>  [<parameter> [<...>]]
-* defines a new Signal <name> of type <SignalClass>.
-* Parameters vary depending on <SignalClass> (see SIGNALCLASSES).
-*
-* "Track" is a special <SignalClass>, it reads a track definition.
-* First parameter is the filename to read from.
-* (no spaces allowed for obvious reasons)
-*
-* "instruments" is a special <name>, it reads instrument definitions.
-* First parameter is the filename to read from.
-* (no spaces allowed for obvious reasons)
-*
-* "signals" is a special <name>, it reads a signal definition.
-* First parameter is the filename to read from.
-* (no spaces allowed for obvious reasons)
-*
-* "return" is a special <name>, it defines the final file output:
-* First parameter is the name of the signal to write to disk.
-* Second parameter is the filename to write to.
-* (no spaces allowed for obvious reasons)
+* Last Ninja 1 testsong
 *
 * ----------------------------------------------------------------
-* load signal definitions from signal.1
-signals	signal.1
-* ----------------------------------------------------------------
+
+signals lastninja.signals
+*
 bells	Track		lastninja.track.sakuhachi
 bells_a	Amplifier	bells	0.2
 bells_e	DelayEcho	bells_a	40 0.2 0.2

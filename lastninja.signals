@@ -1,0 +1,9 @@
+define	LFO1	0
+sine	SineWave	.2
+amp	Amplifier	sine	0.3
+return	Mixer	amp	0.4
+
+define	LFO2	0
+sine	SineWave	.35
+amp	Amplifier	sine	0.45
+return	Mixer	amp	0.5

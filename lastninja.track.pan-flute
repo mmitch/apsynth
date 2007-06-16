@@ -1,4 +1,11 @@
 speed 0;* don't wait on comments ^_^
-instrument Sawtooth; speed 320
+
+signal lfo LFO2
+
+newinstrument EnvSquare SquareWave ADSREnvelope 2500 1000 0.8 5000
+
+instrument EnvSquare lfo
+
+speed 320
 include	lastninja.track.pattern.pause
 include	lastninja.track.pan-flute.pattern.00

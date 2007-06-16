@@ -1,5 +1,11 @@
 speed 0;* don't wait on comments ^_^
+
 signal	lfo	LFO1
-instrument Square lfo; speed 320
+
+newinstrument EnvSqine SquineWave ADSREnvelope 1000 0 1 2000
+
+instrument EnvSqine lfo
+
+speed 320
 include	lastninja.track.sakuhachi.pattern.00
 include	lastninja.track.sakuhachi.pattern.00
