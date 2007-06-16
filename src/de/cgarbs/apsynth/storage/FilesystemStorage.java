@@ -513,10 +513,10 @@ public class FilesystemStorage implements StorageBackend {
                     );
         } else {
             // with envelope
+            offset += 2;
 
-            offset += 2; // set new offset, saves some calculations
-            
             EnvelopeClass envelopeClass = Pool.getEnvelopeClass( token[offset] );
+            offset ++;
             
             int paramCount = envelopeClass.getParamCount();
             if (paramCount != token.length - offset) {
