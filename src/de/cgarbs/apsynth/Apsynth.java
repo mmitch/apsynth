@@ -2,6 +2,7 @@ package de.cgarbs.apsynth;
 
 import java.util.Date;
 
+import de.cgarbs.apsynth.envelope.ADSREnvelopeClass;
 import de.cgarbs.apsynth.instrument.library.HiHatClass;
 import de.cgarbs.apsynth.instrument.library.SawtoothClass;
 import de.cgarbs.apsynth.instrument.library.SineClass;
@@ -64,6 +65,8 @@ public class Apsynth {
         Pool.registerInstrumentClass(new SawtoothClass());
         Pool.registerInstrumentClass(new de.cgarbs.apsynth.instrument.library.NullClass());
         Pool.registerInstrumentClass(new HiHatClass());
+        
+        Pool.registerEnvelopeClass(new ADSREnvelopeClass());
         
     }
 
