@@ -1,9 +1,9 @@
 package de.cgarbs.apsynth.instrument.library;
 
-import de.cgarbs.apsynth.ADSREnvelope;
-import de.cgarbs.apsynth.Envelope;
 import de.cgarbs.apsynth.EnvelopeNote;
 import de.cgarbs.apsynth.Note;
+import de.cgarbs.apsynth.envelope.ADSREnvelope;
+import de.cgarbs.apsynth.envelope.Envelope;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.signal.Signal;
