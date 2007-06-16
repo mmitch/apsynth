@@ -6,6 +6,7 @@ newinstrument EnvSquare SquareWave ADSREnvelope 2500 1000 0.8 5000
 
 instrument EnvSquare lfo
 
-speed 320
+speed 400
 include	lastninja.track.pattern.pause
 include	lastninja.track.pan-flute.pattern.00
+include	lastninja.track.pan-flute.pattern.01

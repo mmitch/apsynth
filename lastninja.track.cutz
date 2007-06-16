@@ -1,0 +1,12 @@
+speed 0;* don't wait on comments ^_^
+
+newinstrument EnvSquare2 SquareWave ADSREnvelope 50 15000 0 55000
+
+instrument EnvSquare2 0.5
+
+speed 400
+include	lastninja.track.pattern.pause
+include	lastninja.track.pattern.pause
+include lastninja.track.cutz.pattern.00
+include lastninja.track.cutz.pattern.00
+* include	lastninja.track.pan-flute.pattern.00

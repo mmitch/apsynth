@@ -6,6 +6,6 @@ newinstrument EnvSqine SquineWave ADSREnvelope 1000 0 1 2000
 
 instrument EnvSqine lfo
 
-speed 320
+speed 400
 include	lastninja.track.sakuhachi.pattern.00
 include	lastninja.track.sakuhachi.pattern.00
