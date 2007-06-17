@@ -1,0 +1,7 @@
+speed 0;* don't wait on comments ^_^
+sample HHclose
+speed 400
+lastninja.track.pattern.pause
+include lastninja.track.hihat.pattern.00
+include lastninja.track.hihat.pattern.00
+include lastninja.track.hihat.pattern.00

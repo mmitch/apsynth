@@ -17,7 +17,13 @@ cutz Track	lastninja.track.cutz
 cutz_f	LowPass	cutz 6000 95 45 5
 cutz_a	Amplifier	cutz_f	0.2
 *
-mix		Mixer	saku_e pan_a
-mix2	Mixer	mix	cutz_a
+hihat	Track	lastninja.track.hihat
+hihat_a	Amplifier	hihat	0.3
+*
+drums	Mixer	hihat_a	0
+*
+mix1		Mixer	saku_e pan_a
+mix2	Mixer	mix1	cutz_a
+mix	Mixer	mix2	drums
 * Write to disk
-return	mix2	/tmp/lastninja.wav
+return	mix	/tmp/lastninja.wav
