@@ -17,6 +17,7 @@ import de.cgarbs.apsynth.envelope.EnvelopeClass;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.instrument.dynamic.DynamicInstrumentClass;
+import de.cgarbs.apsynth.instrument.library.SampleClass;
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
@@ -204,6 +205,16 @@ public class FilesystemStorage implements StorageBackend {
 	                    	}
 	                    	
 	                        instrument = instrumentClass.instanciate(instrumentSignals);
+	                        // TODO error checking
+	
+	                    // change instrument to sample player
+	                    } else if (token[0].equals("sample")) {
+	                    	if (token.length != 2) {
+	                    		throw new ParseException("wrong argument count in sample selection (expected 1 got "+(token.length-1)+")");
+	                    	}
+	                    	
+	                        instrument = new SampleClass().instanciate(new Signal[]{});
+	                        ((de.cgarbs.apsynth.instrument.library.SampleClass.Sample) instrument).setSample(token[1]);
 	                        // TODO error checking
 	
                         // define a signal

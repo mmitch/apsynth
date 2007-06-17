@@ -58,6 +58,7 @@ public class Apsynth {
         Pool.registerSignalClass(new DataBlockClass());
         Pool.registerSignalClass(new HighPassClass());
         Pool.registerSignalClass(new LowPassClass());
+        Pool.registerSignalClass(new de.cgarbs.apsynth.signal.library.SampleClass());
 
         Pool.registerInstrumentClass(new SineClass());
         Pool.registerInstrumentClass(new SquareClass());
