@@ -84,6 +84,10 @@ public class WaveWriter {
      */
     public void write(double sample) throws IOException
     {
+        if ((sample < -1) || (sample > 1)) {
+            System.out.println("CLIP");
+        }
+        
 		if (bitsize == 8) {
 			byte val = (byte)((sample+1)*127); 
 			out.write(val);

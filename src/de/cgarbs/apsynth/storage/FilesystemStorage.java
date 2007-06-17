@@ -157,6 +157,8 @@ public class FilesystemStorage implements StorageBackend {
     
     public double readTrackRecursive(String filename, Track track, double startPosition, Instrument instrument, double step) {
         
+        Apsynth.debug("reading track: "+filename);
+        
         double position = startPosition;
         
         try {
@@ -292,7 +294,9 @@ public class FilesystemStorage implements StorageBackend {
 
     public Sample readSample(String identifier) {
 
-    	Sample sample = null;
+        Apsynth.debug("reading sample: "+identifier);
+
+        Sample sample = null;
     	
     	try {
     		WaveFile in = new WaveFile(identifier+".wav");
@@ -371,6 +375,8 @@ public class FilesystemStorage implements StorageBackend {
     		
     		sample = new Sample(identifier, samplerate, sampledata);
 
+            Apsynth.debug("\tlength: "+sampledata.length);
+
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -383,6 +389,9 @@ public class FilesystemStorage implements StorageBackend {
     }
 
 	public WaveWriter readProject(String filename) {
+
+        Apsynth.debug("reading project: "+filename);
+
         WaveWriter w = null;
         
         try {

@@ -139,4 +139,8 @@ public class Apsynth {
         System.out.print(minutes+":");
         System.out.println(seconds);
     }
+    
+    public static void debug(String logText) {
+        System.out.println(logText);
+    }
 }
