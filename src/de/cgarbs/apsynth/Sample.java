@@ -17,7 +17,11 @@ public class Sample {
     }
     
     public double get(long step) {
-        return data[(int)step];
+    	if (step < data.length) {
+    		return data[(int)step];
+    	} else {
+    		return 0;
+    	}
     }
 
 	public int getSamplerate() {
