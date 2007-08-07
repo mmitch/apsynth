@@ -31,13 +31,15 @@ public class SilenceDetector {
     /**
      * monitors a value
      * @param value signal value to monitor
+     * @return the input value for convenience
      */
-    public void monitor(double value) {
+    public double monitor(double value) {
         if (value < 0.001) {
             silence++;
         } else {
             silence = 0;
         }
+        return value;
     }
     
     /**
