@@ -1,17 +1,21 @@
 TODO
 ====
 
+ * dynamic instrument definitions with signal parameters
+ * Note.isfinished() does not honor envelopes any more
+ 
+DONE
+====
+
+<200708
+
+ * optimized various signal classes when called with constants
  * FIRs berechnen
    Eingabeparameter: http://www.bores.com/courses/intro/filters/4_spec.htm
    Umwandlungen so: http://www.bores.com/courses/intro/filters/4_pain.htm
    oder über die Remez-Funktion (kompliziert!)
    Am besten etwas, das sich genau so verhält wie firpm():
    http://www.mathworks.com/access/helpdesk/help/toolbox/signal/index.html?/access/helpdesk/help/toolbox/signal/firpm.html
- 
-DONE
-====
-
- * optimized various signal classes when called with constants
 
 20060419:
 
