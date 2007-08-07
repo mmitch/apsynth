@@ -55,6 +55,7 @@ public class WaveWriter {
     	blockalign = (short)(channels * bitsize / 8);
 
     	out = new WaveFile(filename);
+        System.out.println("writing to "+filename);
     	
     	// RIFF
     	out.writeString("RIFF");
