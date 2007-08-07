@@ -22,12 +22,12 @@ public class SampleClass extends DefaultSignalClass {
 
         private de.cgarbs.apsynth.Sample sample = null;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
         	if (sample == null) {
         		return 0;
         	}
-        	return sample.get(tick);
+        	return sample.get(local);
         	
         }
 
