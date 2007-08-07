@@ -1,7 +1,6 @@
 speed 0;* don't wait on comments ^_^
 
-newinstrument EnvSquare2 SquareWave ADSREnvelope 50 15000 0 55000
-
+newinstrument EnvSquare2 EnvSquareWave2
 instrument EnvSquare2; * 0.5
 
 speed 400

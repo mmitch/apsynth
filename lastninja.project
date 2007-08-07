@@ -17,10 +17,11 @@ cutz 	Track		lastninja.track.cutz
 cutz_f	LowPass		cutz 6000 95 45 5
 cutz_a	Amplifier	cutz_f	0.2
 *
-hihat	Track		lastninja.track.hihat
-hihat_a	Amplifier	hihat	0.3
+* hihat	Track		lastninja.track.hihat
+* hihat_a	Amplifier	hihat	0.3
 *
-drums	Mixer		hihat_a	0
+* drums	Mixer		hihat_a	0
+drums	Mixer		0	0
 *
 mix1	Mixer		saku_e pan_a
 mix2	Mixer		mix1	cutz_a

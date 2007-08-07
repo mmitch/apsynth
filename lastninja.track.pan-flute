@@ -2,8 +2,7 @@ speed 0;* don't wait on comments ^_^
 
 signal lfo LFO2
 
-newinstrument EnvSquare SquareWave ADSREnvelope 2500 1000 0.8 5000
-
+newinstrument EnvSquare EnvSquareWave
 instrument EnvSquare; * lfo
 
 speed 400
