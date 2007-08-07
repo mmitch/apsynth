@@ -1,12 +1,10 @@
 package de.cgarbs.apsynth.instrument.library;
 
-import de.cgarbs.apsynth.envelope.Envelope;
-import de.cgarbs.apsynth.envelope.ADSREnvelopeClass.ADSREnvelope;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
-import de.cgarbs.apsynth.note.EnvelopeNote;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.library.ADSREnvelopeClass.ADSREnvelope;
 
 public class SquareClass extends DefaultInstrumentClass {
 
@@ -25,7 +23,6 @@ public class SquareClass extends DefaultInstrumentClass {
 
     public static class Square extends Instrument {
 
-        private Envelope env = new ADSREnvelope(0, 0, 1, 100);
         private Signal duty = null;
         
         private Square(Signal duty) {
@@ -33,11 +30,13 @@ public class SquareClass extends DefaultInstrumentClass {
         }
         
         public Note play(Signal freq, long length) {
-            return new EnvelopeNote(
-                    Pool.getSignalClass("SquareWave").instantiate(new Signal[]{freq, duty}),
-                            length,
-                            env
-                            );
+            return new Note(
+                    Pool.getSignalClass("Amplifier").instantiate(new Signal[]{
+                            Pool.getSignalClass("SquareWave").instantiate(new Signal[]{freq, duty}),
+                            new ADSREnvelope(length, 0, 0, 1, 100)   
+                    }),
+                    length
+                    );
         }
         
     }

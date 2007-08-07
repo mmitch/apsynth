@@ -12,8 +12,6 @@ import de.cgarbs.apsynth.Rule;
 import de.cgarbs.apsynth.Sample;
 import de.cgarbs.apsynth.Track;
 import de.cgarbs.apsynth.WaveWriter;
-import de.cgarbs.apsynth.envelope.Envelope;
-import de.cgarbs.apsynth.envelope.EnvelopeClass;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.instrument.dynamic.DynamicInstrumentClass;
@@ -525,34 +523,12 @@ public class FilesystemStorage implements StorageBackend {
         String instrumentName = token[offset];
         String signalName = token[offset+1];
         if (token.length == offset + 1) {
-            // no envelope
             return new DynamicInstrumentClass(
                     instrumentName,
-                    signalName,
-                    (Envelope)null
+                    signalName
                     );
         } else {
-            // with envelope
-            offset += 2;
-
-            EnvelopeClass envelopeClass = Pool.getEnvelopeClass( token[offset] );
-            offset ++;
-            
-            int paramCount = envelopeClass.getParamCount();
-            if (paramCount != token.length - offset) {
-                throw new ParseException("wrong argument count in envelope at Instrument definition "+instrumentName);
-            }
-            
-            Signal parameters[] = new Signal[paramCount];
-            for (int i=0; i< paramCount; i++) {
-                parameters[i] = parseSignalParameter(signals, token[i + offset]);
-            }
-
-            return new DynamicInstrumentClass(
-                    instrumentName,
-                    signalName,
-                    envelopeClass.instanciate(parameters)
-                    );
+            throw new ParseException("wrong argument count at Instrument definition "+instrumentName);
         }
     }
 

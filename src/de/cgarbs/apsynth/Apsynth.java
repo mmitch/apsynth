@@ -2,13 +2,13 @@ package de.cgarbs.apsynth;
 
 import java.util.Date;
 
-import de.cgarbs.apsynth.envelope.ADSREnvelopeClass;
 import de.cgarbs.apsynth.instrument.library.HiHatClass;
 import de.cgarbs.apsynth.instrument.library.SawtoothClass;
 import de.cgarbs.apsynth.instrument.library.SineClass;
 import de.cgarbs.apsynth.instrument.library.SquareClass;
 import de.cgarbs.apsynth.instrument.library.SquineClass;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.signal.library.ADSREnvelopeClass;
 import de.cgarbs.apsynth.signal.library.AmplifierClass;
 import de.cgarbs.apsynth.signal.library.ArpeggioClass;
 import de.cgarbs.apsynth.signal.library.ClipperClass;
@@ -58,6 +58,7 @@ public class Apsynth {
         Pool.registerSignalClass(new DataBlockClass());
         Pool.registerSignalClass(new HighPassClass());
         Pool.registerSignalClass(new LowPassClass());
+        Pool.registerSignalClass(new ADSREnvelopeClass());
         Pool.registerSignalClass(new de.cgarbs.apsynth.signal.library.SampleClass());
 
         Pool.registerInstrumentClass(new SineClass());
@@ -66,8 +67,6 @@ public class Apsynth {
         Pool.registerInstrumentClass(new SawtoothClass());
         Pool.registerInstrumentClass(new de.cgarbs.apsynth.instrument.library.NullClass());
         Pool.registerInstrumentClass(new HiHatClass());
-        
-        Pool.registerEnvelopeClass(new ADSREnvelopeClass());
         
     }
 
