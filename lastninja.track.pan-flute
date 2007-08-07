@@ -4,7 +4,7 @@ signal lfo LFO2
 
 newinstrument EnvSquare SquareWave ADSREnvelope 2500 1000 0.8 5000
 
-instrument EnvSquare lfo
+instrument EnvSquare; * lfo
 
 speed 400
 include	lastninja.track.pattern.pause

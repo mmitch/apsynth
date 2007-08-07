@@ -28,7 +28,7 @@ public class DynamicInstrumentClass extends InstrumentClass {
     
     @Override
     public int getParamCount() {
-        return Pool.getSignalClass(signal).getParamCount() - 1;
+        return Pool.getSignalClass(signal).getParamCount() - 2;
     }
 
 

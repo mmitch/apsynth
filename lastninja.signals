@@ -7,3 +7,8 @@ define	LFO2	0
 sine	SineWave	.35
 amp	Amplifier	sine	0.45
 return	Mixer	amp	0.5
+
+define EnvSquineWave 2
+squine	SquineWave 		var0 0.5
+env		ADSREnvelope	var1 1000 0 1 2000
+return	Amplifier	squine env

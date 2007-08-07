@@ -522,14 +522,15 @@ public class FilesystemStorage implements StorageBackend {
     private InstrumentClass parseInstrumentLine(HashMap<String,Signal> signals, String[] token, int offset) throws ParseException {
         String instrumentName = token[offset];
         String signalName = token[offset+1];
-        if (token.length == offset + 1) {
+        // TODO FETTES TODO - Instrumente können keine Parameter!!!
+//        if (token.length == offset + 1) {
             return new DynamicInstrumentClass(
                     instrumentName,
                     signalName
                     );
-        } else {
-            throw new ParseException("wrong argument count at Instrument definition "+instrumentName);
-        }
+//        } else {
+//            throw new ParseException("wrong argument count at Instrument definition "+instrumentName);
+//        }
     }
 
 	/**
