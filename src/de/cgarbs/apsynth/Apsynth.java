@@ -102,19 +102,13 @@ public class Apsynth {
         } while (! Pool.allTracksFinished());
         
         // wait for 0.5s pause
-        long silence = 0;
-        while (silence < samplefreq/2) {
-            if (mainSignal.write(tick) < 0.001) {
-                silence++;
-            } else {
-                silence = 0;
-            }
-            tick++;
+        SilenceDetector s = new SilenceDetector();
+        while (! s.isSilent()) {
+            s.monitor(mainSignal.write(tick));
 
             if (tick % samplefreq == 0) {
                 timestamp(tick);
             }
-            
         }
         
         long endTime = new Date().getTime();
