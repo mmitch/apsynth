@@ -24,9 +24,9 @@ public class EndianChangerClass extends DefaultSignalClass {
 
         private Signal signal = null;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
-            int value = (int) ((signal.get(tick)+1) * 32767);
+            int value = (int) ((signal.get(tick, local)+1) * 32767);
             byte low = (byte) (value % 256);
             byte hi  = (byte) (value / 256);
             return ((double)(low*256+hi))/65535;

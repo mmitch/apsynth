@@ -38,8 +38,8 @@ public class LowPassClass extends DefaultSignalClass {
 
         private Signal filter;
         
-        public double get(long t) {
-            return filter.get(t);
+        public double get(long t, long l) {
+            return filter.get(t, l);
         }
 
         /**
@@ -59,11 +59,11 @@ public class LowPassClass extends DefaultSignalClass {
             double[] bands   = new double[2*numBands];
             double[] weights = new double[numBands];
 
-            double f2 = s_cutoff.get(0) / Apsynth.samplefreq;
-            double trband = s_trband.get(0) / Apsynth.samplefreq;
+            double f2 = s_cutoff.get(0, 0) / Apsynth.samplefreq;
+            double trband = s_trband.get(0, 0) / Apsynth.samplefreq;
             
-            double atten = s_atten.get(0);
-            double ripple = s_ripple.get(0);
+            double atten = s_atten.get(0, 0);
+            double ripple = s_ripple.get(0, 0);
             double deltaP = 0.5f*(1.0f - (double)Math.pow(10.0f, -0.05f*ripple));
             double deltaS = (double)Math.pow(10.0f, -0.05f*atten);
             double rippleRatio = deltaP / deltaS;

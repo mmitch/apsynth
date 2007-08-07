@@ -57,7 +57,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             
             // fill taps (data is only used in this constructor)
             for (int i=0; i<this.tapcount; i++) {
-            	tap[i] = data.get(i);
+            	tap[i] = data.get(0, i);
             }
             
             // duplicate coefficient table (optimization)
@@ -81,14 +81,14 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
         }
         
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
             // store new signal in ringbuffer
             head++;
             if (head == tapcount) {
                 head = 0;
             }
-            buffer[head] = signal.get(tick);
+            buffer[head] = signal.get(tick, local);
             
             // add all taps
             double sum = 0;

@@ -59,8 +59,8 @@ public class DynamicSignalClass extends SignalClass {
             lastVar = tmpVars.get(tmpVars.size()-1);
         }
 
-        public double get(long t) {
-            return lastVar.get(t);
+        public double get(long t, long l) {
+            return lastVar.get(t, l);
         }
 
     }

@@ -26,7 +26,7 @@ public class WaveWriter {
             return 0;
         }
         
-        double value = signal.get(tick); 
+        double value = signal.get(tick, 0); 
         try {
 	        out.write(value);
 	    } catch (IOException e1) {

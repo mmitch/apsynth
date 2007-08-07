@@ -23,7 +23,7 @@ public class NullClass extends DefaultSignalClass {
             // no-op: no parameters 
         }
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
             return 0;
         }
 

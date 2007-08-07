@@ -31,7 +31,7 @@ public class Track implements Signal {
         }
     }
     
-    public double get(long tick) {
+    public double get(long tick, long local) {
         double signal = 0;
         
         // check for new notes to be played
@@ -48,7 +48,7 @@ public class Track implements Signal {
         Enumeration e = activeNotes.elements();
         for (; e.hasMoreElements(); ) {
             Note note = (Note)e.nextElement(); 
-            signal += note.get(tick);
+            signal += note.get(tick, local);
             if (note.isFinished(tick)) {
                 activeNotes.remove(note);
             }

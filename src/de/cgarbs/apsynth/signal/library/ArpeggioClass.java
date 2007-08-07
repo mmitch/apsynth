@@ -36,18 +36,18 @@ public class ArpeggioClass extends DefaultSignalClass {
         private Signal lengthInMs;
         private Vector<Signal> signals = new Vector<Signal>();
         
-        public double get(long t) {
+        public double get(long t, long l) {
             if (startTick == -1) {
                 startTick = t;
             }
-            if (t > startTick+(lengthInMs.get(t) * Apsynth.samplefreq / 1000)) {
+            if (t > startTick+(lengthInMs.get(t, l) * Apsynth.samplefreq / 1000)) {
                 startTick = t;
                 current++;
                 if (current == signals.size()) {
                     current = 0;
                 }
             }
-            return signals.get(current).get(t);
+            return signals.get(current).get(t, l);
         }
 
         private Arpeggio(Signal[] s) {
@@ -66,7 +66,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private double lengthInTicks;
         private Vector<Signal> signals = new Vector<Signal>();
         
-        public double get(long t) {
+        public double get(long t, long l) {
             if (startTick == -1) {
                 startTick = t;
             }
@@ -77,11 +77,11 @@ public class ArpeggioClass extends DefaultSignalClass {
                     current = 0;
                 }
             }
-            return signals.get(current).get(t);
+            return signals.get(current).get(t, l);
         }
 
         private ConstantArpeggio(Signal[] s) {
-            this.lengthInTicks = s[0].get(0) * Apsynth.samplefreq / 1000;
+            this.lengthInTicks = s[0].get(0, 0) * Apsynth.samplefreq / 1000;
             for (int i=1; i<s.length; i++) {
                 signals.add(s[i]);
             }

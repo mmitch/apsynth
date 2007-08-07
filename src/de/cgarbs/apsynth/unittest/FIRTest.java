@@ -19,7 +19,7 @@ public class FIRTest {
         int length = input.getLength() + taps.getLength();
         
         for (long tick = 0;tick<length; tick++) {
-        	System.out.println(tick+":"+fir.get(tick));
+        	System.out.println(tick+":"+fir.get(tick, tick));
         }
         
     }

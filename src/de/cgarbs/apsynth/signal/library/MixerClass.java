@@ -13,7 +13,7 @@ public class MixerClass extends DefaultSignalClass {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
             if (s[1] instanceof ConstantSignal) {
-                return ConstantSignalClass.get(s[0].get(0)+s[1].get(0));
+                return ConstantSignalClass.get(s[0].get(0,0)+s[1].get(0,0));
             } else {
                 return new ConstantMixer(s[1], s[0]);
             }
@@ -33,8 +33,8 @@ public class MixerClass extends DefaultSignalClass {
         private Signal s1;
         private Signal s2;
         
-        public double get(long t) {
-            return s1.get(t) + s2.get(t);
+        public double get(long t, long l) {
+            return s1.get(t,l) + s2.get(t,l);
         }
 
         private Mixer(Signal s1, Signal s2) {
@@ -49,13 +49,13 @@ public class MixerClass extends DefaultSignalClass {
         private Signal s1;
         private double s2;
         
-        public double get(long t) {
-            return s1.get(t) + s2;
+        public double get(long t, long l) {
+            return s1.get(t,l) + s2;
         }
 
         private ConstantMixer(Signal s1, Signal s2) {
             this.s1 = s1;
-            this.s2 = s2.get(0);
+            this.s2 = s2.get(0,0);
         }
         
     }

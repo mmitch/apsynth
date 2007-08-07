@@ -39,7 +39,7 @@ public class PinkNoiseClass extends DefaultSignalClass {
             // no-op: no parameters 
         }
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
         	double pink;
         	b0 = 0.99886 * b0 + Math.random() * 0.0555179;
         	b1 = 0.99332 * b1 + Math.random() * 0.0750759;

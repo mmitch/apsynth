@@ -27,7 +27,7 @@ public class VariableSignalClass extends DefaultSignalClass {
             val.put(0, 0);
         };
         
-        public double get(long t) {
+        public double get(long t, long l) {
             return val.get(t);
         }
 

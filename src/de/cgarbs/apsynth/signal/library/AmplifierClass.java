@@ -28,8 +28,8 @@ public class AmplifierClass extends DefaultSignalClass {
         private Signal s1;
         private Signal s2;
         
-        public double get(long t) {
-            return s1.get(t) * s2.get(t);
+        public double get(long t, long l) {
+            return s1.get(t, l) * s2.get(t, l);
         }
 
         private Amplifier(Signal s1, Signal s2) {
@@ -44,13 +44,13 @@ public class AmplifierClass extends DefaultSignalClass {
         private Signal s1;
         private double s2;
         
-        public double get(long t) {
-            return s1.get(t) * s2;
+        public double get(long t, long l) {
+            return s1.get(t, l) * s2;
         }
 
         private ConstantAmplifier(Signal s1, Signal s2) {
             this.s1 = s1;
-            this.s2 = s2.get(0);
+            this.s2 = s2.get(0, 0);
         }
         
     }

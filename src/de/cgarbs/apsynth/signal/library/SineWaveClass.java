@@ -31,9 +31,9 @@ public class SineWaveClass extends DefaultSignalClass {
         private double lastFreq = 0;
         private double shift = 0;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
-            double freq = frequency.get(tick);
+            double freq = frequency.get(tick, local);
             
             if (lastFreq != freq) {
                 if (tick > 0) {
@@ -56,12 +56,12 @@ public class SineWaveClass extends DefaultSignalClass {
 
         private double factor = 0;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
             return Math.sin(tick * factor);
         }
 
         private ConstantSineWave(Signal frequency) {
-            this.factor = frequency.get(0) * 2*Math.PI / Apsynth.samplefreq;
+            this.factor = frequency.get(0, 0) * 2*Math.PI / Apsynth.samplefreq;
         }
 
     }

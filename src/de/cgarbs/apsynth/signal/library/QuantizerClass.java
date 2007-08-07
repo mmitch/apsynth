@@ -24,9 +24,9 @@ public class QuantizerClass extends DefaultSignalClass {
         private Signal signal;
         private Signal quant;
         
-        public double get(long tick) {
-            double q = quant.get(tick); // cache for speedup
-            return Math.round( signal.get(tick) * q ) / q;
+        public double get(long tick, long local) {
+            double q = quant.get(tick, local); // cache for speedup
+            return Math.round( signal.get(tick, local) * q ) / q;
         }
 
         /**

@@ -28,7 +28,7 @@ public class RegisterClass extends DefaultSignalClass {
             ary.put(0, 0);
         }
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
             return ary.get(tick);
         }
         

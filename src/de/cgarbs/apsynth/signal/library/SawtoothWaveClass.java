@@ -32,13 +32,13 @@ public class SawtoothWaveClass extends DefaultSignalClass {
       //private double lastFreq = 0;
         private double shift = 0;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
             // TODO implement bandwith limited construction
             // using sine waves
             // see http://en.wikipedia.org/wiki/Saw_wave
             
-            double freq = frequency.get(tick);
+            double freq = frequency.get(tick, local);
             
             /*
              * TODO implement soft frequency change
@@ -66,7 +66,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
 
         private double factor = 0;
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
             double x = tick * factor; 
             return (x - Math.floor(x))*2-1;
@@ -74,7 +74,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
         }
 
         private ConstantSawtoothWave(Signal frequency) {
-            this.factor = frequency.get(0) / 44100;
+            this.factor = frequency.get(0, 0) / 44100;
             
         }
 

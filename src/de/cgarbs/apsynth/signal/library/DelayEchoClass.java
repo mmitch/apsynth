@@ -38,16 +38,16 @@ public class DelayEchoClass extends DefaultSignalClass {
         
         private DelayEcho(Signal signal, Signal delay, Signal amp, Signal reamp) {
             this.signal = signal;
-            this.delay = (int)(delay.get(0)*Apsynth.samplefreq/1000);
+            this.delay = (int)(delay.get(0, 0)*Apsynth.samplefreq/1000);
             this.amp = amp;
             this.reamp = reamp;
             this.ringBuffer = new double[this.delay];
         }
 
-        public double get(long tick) {
-            double original = signal.get(tick);
-            double processed = original + (ringBuffer[pos] * amp.get(tick));
-            ringBuffer[pos] = original + (ringBuffer[pos] * reamp.get(tick));
+        public double get(long tick, long local) {
+            double original = signal.get(tick, local);
+            double processed = original + (ringBuffer[pos] * amp.get(tick, local));
+            ringBuffer[pos] = original + (ringBuffer[pos] * reamp.get(tick, local));
             pos++;
             if (pos==delay) {
                 pos=0;

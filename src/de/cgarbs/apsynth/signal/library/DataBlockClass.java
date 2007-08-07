@@ -61,9 +61,9 @@ public class DataBlockClass extends DefaultSignalClass {
         	this.add(tmp);
         }
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
         	if (tick<length) {
-                return data.get((int)tick);
+                return data.get((int)local);
         	}
         	return 0;
         }

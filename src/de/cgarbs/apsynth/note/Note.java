@@ -13,11 +13,10 @@ public class Note implements Signal {
         this.duration = duration;
     }
 
-    public double get(long tick) {
+    public double get(long tick, long local) {
     	// TODO hier localTick oder nicht benutzen=
         //return signal.get(localTick++);
-    	localTick++;
-        return signal.get(tick);
+        return signal.get(tick, localTick++);
     }
     
     public boolean isFinished(long tick) {
@@ -30,7 +29,7 @@ public class Note implements Signal {
      */
     public void setParameters(Signal[] s) {
         this.signal = s[0];
-        this.duration = (long)s[0].get(0);
+        this.duration = (long)s[0].get(0, 0);
     }
     
 }

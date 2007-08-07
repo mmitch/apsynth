@@ -30,9 +30,9 @@ public class ClipperClass extends DefaultSignalClass {
         private Signal signal;
         private Signal clip;
         
-        public double get(long tick) {
-            double s = signal.get(tick);
-            double c = clip.get(tick);
+        public double get(long tick, long local) {
+            double s = signal.get(tick, local);
+            double c = clip.get(tick, local);
             if (s > c) {
                 return c;
             } else if (s < -c) {
@@ -58,8 +58,8 @@ public class ClipperClass extends DefaultSignalClass {
         private double clipPositive;
         private double clipNegative;
         
-        public double get(long tick) {
-            double s = signal.get(tick);
+        public double get(long tick, long local) {
+            double s = signal.get(tick, local);
             if (s > clipPositive) {
                 return clipPositive;
             } else if (s < clipNegative) {
@@ -74,7 +74,7 @@ public class ClipperClass extends DefaultSignalClass {
          */
         private ConstantClipper(Signal signal, Signal clip) {
             this.signal = signal;
-            this.clipPositive = clip.get(0);
+            this.clipPositive = clip.get(0, 0);
             this.clipNegative = -clipPositive;
         }
 

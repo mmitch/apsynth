@@ -48,12 +48,12 @@ public class HighPassClass extends DefaultSignalClass {
         private String lastKey;
         private String newKey;
         
-        public double get(long t) {
-        	newKey = getHashKey(t);
+        public double get(long t, long l) {
+        	newKey = getHashKey(t, l);
         	if (! newKey.equals(lastKey) ) {
-        		update_filter(t);
+        		update_filter(t, l);
         	}
-            return filter.get(t);
+            return filter.get(t, l);
         }
 
         /**
@@ -76,17 +76,17 @@ public class HighPassClass extends DefaultSignalClass {
             this.filter = new FiniteImpulseResponse(signal, new DataBlock(new double[]{1}));
         }
         
-        private String getHashKey(long t) {
+        private String getHashKey(long t, long l) {
         	StringBuffer b = new StringBuffer();
         	b.append(maxTaps).append(':');
-        	b.append(s_cutoff.get(t)).append(':');
-        	b.append(s_trband.get(t)).append(':');
-        	b.append(s_atten.get(t) ).append(':');
-        	b.append(s_ripple.get(t)).append(':');
+        	b.append(s_cutoff.get(t, l)).append(':');
+        	b.append(s_trband.get(t, l)).append(':');
+        	b.append(s_atten.get(t, l) ).append(':');
+        	b.append(s_ripple.get(t, l)).append(':');
         	return b.toString();
         }
         
-        void update_filter(long t) {
+        void update_filter(long t, long l) {
         	
         	if (cache.containsKey(newKey)) {
         		filter.updateTaps(cache.get(newKey));
@@ -98,11 +98,11 @@ public class HighPassClass extends DefaultSignalClass {
 	            double[] bands   = new double[2*numBands];
 	            double[] weights = new double[numBands];
 	
-	            double f1 = s_cutoff.get(t) / Apsynth.samplefreq;
-	            double trband = s_trband.get(t) / Apsynth.samplefreq;
+	            double f1 = s_cutoff.get(t, l) / Apsynth.samplefreq;
+	            double trband = s_trband.get(t, l) / Apsynth.samplefreq;
 	            
-	            double atten = s_atten.get(t);
-	            double ripple = s_ripple.get(t);
+	            double atten = s_atten.get(t, l);
+	            double ripple = s_ripple.get(t, l);
 	            double deltaP = 0.5f*(1.0f - (double)Math.pow(10.0f, -0.05f*ripple));
 	            double deltaS = (double)Math.pow(10.0f, -0.05f*atten);
 	            double rippleRatio = deltaP / deltaS;

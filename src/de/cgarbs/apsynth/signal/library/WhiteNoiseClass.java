@@ -23,7 +23,7 @@ public class WhiteNoiseClass extends DefaultSignalClass {
             // no-op: no parameters 
         }
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
             return Math.random() * 2 - 1;
         }
 

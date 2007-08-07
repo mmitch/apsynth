@@ -58,26 +58,26 @@ public class ADSREnvelopeClass extends EnvelopeClass {
             //      http://en.wikipedia.org/wiki/Synthesizer
             //      http://en.wikipedia.org/wiki/ADSR
             
-            if (localTick > duration + rtime.get(tick)) {
+            if (localTick > duration + rtime.get(tick, localTick)) {
                 return 0;
             }
             if (localTick > duration) {
-                return slevel.get(tick) * (1-((localTick - duration)/rtime.get(tick)));
+                return slevel.get(tick, localTick) * (1-((localTick - duration)/rtime.get(tick, localTick)));
             }
-            if (localTick >= atime.get(tick)+dtime.get(tick)) {
-                return slevel.get(tick);
+            if (localTick >= atime.get(tick, localTick)+dtime.get(tick, localTick)) {
+                return slevel.get(tick, localTick);
             }
-            if (localTick > atime.get(tick)) {
-                return 1 - slevel.get(tick) * ((localTick - atime.get(tick))/dtime.get(tick));
+            if (localTick > atime.get(tick, localTick)) {
+                return 1 - slevel.get(tick, localTick) * ((localTick - atime.get(tick, localTick))/dtime.get(tick, localTick));
             }
-            return localTick/atime.get(tick);
+            return localTick/atime.get(tick, localTick);
         }
     
         public boolean isFinished(long tick, long localTick, long duration) {
             
             // TODO: if slevel == 0, localTick > atime + dtime is enough
             
-            if (localTick > duration + rtime.get(tick)) {
+            if (localTick > duration + rtime.get(tick, localTick)) {
                 return true;
             }
             return false;

@@ -31,9 +31,9 @@ public class SquareWaveClass extends DefaultSignalClass {
         private double shift = 0;
         
 
-        public double get(long tick) {
+        public double get(long tick, long local) {
 
-            double freq = frequency.get(tick);
+            double freq = frequency.get(tick, local);
             
             /*
              * TODO implement soft frequency change
@@ -46,7 +46,7 @@ public class SquareWaveClass extends DefaultSignalClass {
              */
             
             double x = (tick+shift) / 44100 * freq; 
-            return (x - Math.floor(x) > duty.get(tick)) ? 1 : -1;
+            return (x - Math.floor(x) > duty.get(tick, local)) ? 1 : -1;
 
         }
 

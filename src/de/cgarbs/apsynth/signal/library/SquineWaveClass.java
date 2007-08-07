@@ -31,12 +31,12 @@ public class SquineWaveClass extends DefaultSignalClass {
         private Signal clipped = null;
         private Signal sound = null;
         
-        public double get(long tick) {
-            double normalize = sound.get(tick);
+        public double get(long tick, long local) {
+            double normalize = sound.get(tick, local);
             if (normalize != 0) {
                 normalize = 1/normalize;
             }
-            return clipped.get(tick) * normalize;
+            return clipped.get(tick, local) * normalize;
         }
 
         private SquineWave(Signal frequency, Signal sound) {
@@ -52,14 +52,14 @@ public class SquineWaveClass extends DefaultSignalClass {
         private Signal clipped = null;
         private double normalize = 0;
         
-        public double get(long tick) {
-            return clipped.get(tick) * normalize;
+        public double get(long tick, long local) {
+            return clipped.get(tick, local) * normalize;
         }
 
         private ConstantSquineWave(Signal frequency, Signal sound) {
             Signal sine  = Pool.getSignalClass("SineWave").instantiate(new Signal[]{frequency});
             this.clipped = Pool.getSignalClass("Clipper").instantiate(new Signal[]{sine, sound});
-            this.normalize = sound.get(0);
+            this.normalize = sound.get(0, 0);
             if (normalize!= 0) {
                 normalize = 1/normalize;
             }

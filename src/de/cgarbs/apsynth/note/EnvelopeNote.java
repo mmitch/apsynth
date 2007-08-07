@@ -12,10 +12,10 @@ public class EnvelopeNote extends Note {
         this.env = env;
     }
     
-    public double get(long tick) {
+    public double get(long tick, long local) {
     	// TODO hier local Tick oder nicht?
         //return env.get(tick, localTick, duration) * signal.get(localTick++);
-        return env.get(tick, localTick++, duration) * signal.get(tick);
+        return env.get(tick, localTick, duration) * signal.get(tick, localTick++);
     }
     
     public boolean isFinished(long tick) {
