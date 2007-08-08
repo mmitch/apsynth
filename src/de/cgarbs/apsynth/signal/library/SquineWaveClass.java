@@ -30,7 +30,7 @@ public class SquineWaveClass extends DefaultSignalClass {
 
         private Signal clipped = null;
         private Signal sound = null;
-        private boolean enveloped = false;
+        private boolean enveloped;
         
         public double get(long tick, long local) {
             double normalize = sound.get(tick, local);
