@@ -13,8 +13,13 @@ squine	SquineWave 		var0 0.5
 env		ADSREnvelope	var1 1000 0 1 2000
 return	Amplifier		squine env
 
+* testing frequency envelopes
 define	EnvSquareWave	2
-square	SquareWave		var0 0.5
+ent		ADSREnvelope	1000 0 0 1 2500
+ent2	Amplifier		ent 0.02
+ent3	Mixer			ent2 1
+freq	Amplifier		var0 ent3
+square	SquareWave		freq 0.5
 env		ADSREnvelope	var1 2500 1000 0.8 5000
 return	Amplifier		square env
 
