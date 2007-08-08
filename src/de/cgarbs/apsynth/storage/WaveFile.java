@@ -14,8 +14,9 @@ import java.nio.ByteOrder;
  */
 class WaveFile extends RandomAccessFile {
 
-    public WaveFile(String filename) throws FileNotFoundException {
+    public WaveFile(String filename) throws FileNotFoundException, IOException {
         super(filename, "rw");
+        setLength(0);
     }
 
     public void writeString(String s) throws IOException {
