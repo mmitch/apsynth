@@ -1,30 +1,21 @@
 package de.cgarbs.apsynth.note;
 
-import de.cgarbs.apsynth.SilenceDetector;
 import de.cgarbs.apsynth.signal.Signal;
 
-public class Note implements Signal {
+public abstract class Note implements Signal {
 
-    Signal signal = null;
-    long duration = 0;
-    long localTick = 0;
-    SilenceDetector s = null;
+    protected Signal signal = null;
+    protected long duration = 0;
+    protected long localTick = 0;
 
     public Note(Signal signal, long duration) {
         this.signal = signal;
         this.duration = duration;
-        s = new SilenceDetector();
     }
 
-    public double get(long tick, long local) {
-    	// TODO hier localTick oder nicht benutzen=
-        //return signal.get(localTick++);
-        return s.monitor(signal.get(tick, localTick++));
-    }
+    abstract public double get(long tick, long local);
     
-    public boolean isFinished(long tick) {
-        return (localTick >= duration && s.isSilent());
-    }
+    abstract public boolean isFinished();
 
     /**
      * 1: signal
@@ -34,5 +25,6 @@ public class Note implements Signal {
         this.signal = s[0];
         this.duration = (long)s[0].get(0, 0);
     }
-    
+
+    abstract public boolean isEnveloped();
 }

@@ -35,5 +35,9 @@ public class SampleClass extends DefaultSignalClass {
     		this.sample = Pool.getSample(name);
     	}
     	
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

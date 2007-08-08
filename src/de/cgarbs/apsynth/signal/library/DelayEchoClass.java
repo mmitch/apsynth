@@ -55,5 +55,9 @@ public class DelayEchoClass extends DefaultSignalClass {
             return processed;
         }
 
+        public boolean isEnveloped() {
+            return true;
+        }
+
     }
 }

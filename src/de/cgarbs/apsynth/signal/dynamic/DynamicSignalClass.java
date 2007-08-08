@@ -30,6 +30,7 @@ public class DynamicSignalClass extends SignalClass {
     public static class DynamicSignal implements Signal {
 
         private Signal lastVar;
+        private boolean enveloped = false;
 
         private DynamicSignal(Rule[] r, Signal[] vars) {
             Vector<Signal> tmpVars = new Vector<Signal>();
@@ -45,7 +46,11 @@ public class DynamicSignalClass extends SignalClass {
                     for (short param=0; param<sc.getParamCount(); param++) {
                         params[param] = tmpVars.get(rule.getOperand(param));
                     }
-                    tmpVars.add(sc.instantiate(params));
+                    Signal newSignal = sc.instantiate(params);
+                    if (newSignal.isEnveloped()) {
+                        enveloped = true;
+                    }
+                    tmpVars.add(newSignal);
 
                 } else if (r[i] instanceof ConstantRule) {
                     ConstantRule rule = (ConstantRule) r[i];
@@ -61,6 +66,10 @@ public class DynamicSignalClass extends SignalClass {
 
         public double get(long t, long l) {
             return lastVar.get(t, l);
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }

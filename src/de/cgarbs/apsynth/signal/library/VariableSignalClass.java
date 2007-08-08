@@ -34,6 +34,10 @@ public class VariableSignalClass extends DefaultSignalClass {
         public void set(long time, double value) {
             val.put(time, value);
         }
+
+        public boolean isEnveloped() {
+            return false;
+        }
         
     }
 }

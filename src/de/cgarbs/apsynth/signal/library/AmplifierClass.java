@@ -36,6 +36,10 @@ public class AmplifierClass extends DefaultSignalClass {
             this.s1 = s1;
             this.s2 = s2;
         }
+
+        public boolean isEnveloped() {
+            return false;
+        }
         
     }
 
@@ -51,6 +55,10 @@ public class AmplifierClass extends DefaultSignalClass {
         private ConstantAmplifier(Signal s1, Signal s2) {
             this.s1 = s1;
             this.s2 = s2.get(0, 0);
+        }
+
+        public boolean isEnveloped() {
+            return false;
         }
         
     }

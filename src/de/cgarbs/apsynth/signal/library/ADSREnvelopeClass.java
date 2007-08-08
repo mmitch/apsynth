@@ -85,6 +85,10 @@ public class ADSREnvelopeClass extends DefaultSignalClass {
             }
             return false;
         }
+
+        public boolean isEnveloped() {
+            return true;
+        }
     
     }
 

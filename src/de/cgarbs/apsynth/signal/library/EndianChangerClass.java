@@ -23,6 +23,7 @@ public class EndianChangerClass extends DefaultSignalClass {
     public static class EndianChanger implements Signal {
 
         private Signal signal = null;
+        private boolean enveloped;
 
         public double get(long tick, long local) {
 
@@ -35,6 +36,11 @@ public class EndianChangerClass extends DefaultSignalClass {
 
         private EndianChanger(Signal signal) {
             this.signal = signal;
+            enveloped = signal.isEnveloped();
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }

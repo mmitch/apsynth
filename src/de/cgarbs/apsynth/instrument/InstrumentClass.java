@@ -11,4 +11,5 @@ public abstract class InstrumentClass extends ClassType {
     public String getType() {
         return "InstrumentClass";
     }
+    
 }

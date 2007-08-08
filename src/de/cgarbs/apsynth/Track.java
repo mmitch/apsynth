@@ -49,7 +49,7 @@ public class Track implements Signal {
         for (; e.hasMoreElements(); ) {
             Note note = (Note)e.nextElement(); 
             signal += note.get(tick, local);
-            if (note.isFinished(tick)) {
+            if (note.isFinished()) {
                 activeNotes.remove(note);
             }
         }
@@ -60,9 +60,13 @@ public class Track implements Signal {
     public boolean isFinished() {
         return (activeNotes.isEmpty() && queue.isEmpty());
     }
-
+    
     public void setParameters(Signal[] s) {
         // no-op: no parameters
+    }
+
+    public boolean isEnveloped() {
+        return true;
     }
 
 }

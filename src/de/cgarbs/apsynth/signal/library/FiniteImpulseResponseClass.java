@@ -37,6 +37,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
         private double tap[];
         private double buffer[];
         private int head; 
+        private boolean enveloped;
         
         public FiniteImpulseResponse(Signal signal, Signal data) {
 
@@ -44,6 +45,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             this.head = 0;
         	updateTaps(data);
             
+            enveloped = signal.isEnveloped();
         }
 
         public void updateTaps(Signal data) {
@@ -97,6 +99,10 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             }
             
             return sum;
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }

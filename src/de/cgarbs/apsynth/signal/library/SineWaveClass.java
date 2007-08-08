@@ -50,6 +50,10 @@ public class SineWaveClass extends DefaultSignalClass {
             this.frequency = frequency;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 
     public class ConstantSineWave implements Signal {
@@ -62,6 +66,10 @@ public class SineWaveClass extends DefaultSignalClass {
 
         private ConstantSineWave(Signal frequency) {
             this.factor = frequency.get(0, 0) * 2*Math.PI / Apsynth.samplefreq;
+        }
+
+        public boolean isEnveloped() {
+            return false;
         }
 
     }

@@ -3,6 +3,8 @@ package de.cgarbs.apsynth.instrument.dynamic;
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.instrument.InstrumentClass;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.EnvelopeNote;
+import de.cgarbs.apsynth.note.FixNote;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
@@ -19,7 +21,9 @@ public class DynamicInstrumentClass extends InstrumentClass {
     }
     
     public Instrument instanciate(Signal[] s) {
+
         return new DynamicInstrument(Pool.getSignalClass(signal), s);
+        
     }
 
     public String getName() {
@@ -41,6 +45,7 @@ public class DynamicInstrumentClass extends InstrumentClass {
         private DynamicInstrument(SignalClass signalClass, Signal[] s) {
             this.signalClass = signalClass;
             this.s = s;
+            
         }
         
         public Note play(Signal freq, long length) {
@@ -48,14 +53,16 @@ public class DynamicInstrumentClass extends InstrumentClass {
             Signal[] signals = new Signal[s.length + 2];
             signals[0] = freq;
             signals[1] = ConstantSignalClass.get(length);
-            for (int i=0; i<s.length ;i++) {
+            for (int i=0; i<s.length; i++) {
                 signals[i+2] = s[i];
             }
-            
-            return new Note(
-                       signalClass.instantiate(signals),
-                               length
-                               );
+
+            Signal signal = signalClass.instantiate(signals);
+            if (signal.isEnveloped()) {
+                return new EnvelopeNote(signal, length);
+            } else {
+                return new FixNote(signal, length);
+            }
         }
         
     }

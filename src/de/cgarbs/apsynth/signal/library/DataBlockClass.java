@@ -72,5 +72,9 @@ public class DataBlockClass extends DefaultSignalClass {
         	return data.size();
         }
         
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

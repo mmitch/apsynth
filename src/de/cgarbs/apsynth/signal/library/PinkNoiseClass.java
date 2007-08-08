@@ -52,5 +52,9 @@ public class PinkNoiseClass extends DefaultSignalClass {
         	return pink * 2 - 1;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

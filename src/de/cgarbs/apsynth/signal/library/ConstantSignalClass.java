@@ -55,5 +55,9 @@ public class ConstantSignalClass extends DefaultSignalClass {
             return value;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

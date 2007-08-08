@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.instrument.library;
 
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.FixNote;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 
@@ -27,7 +28,7 @@ public class NullClass extends DefaultInstrumentClass {
         }
         
         public Note play(Signal freq, long length) {
-            return new Note(
+            return new FixNote(
                     Pool.getSignalClass("Null").instantiate(new Signal[]{}),
                     0
                             );

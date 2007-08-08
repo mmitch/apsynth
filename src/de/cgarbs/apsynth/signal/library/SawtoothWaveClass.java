@@ -1,5 +1,6 @@
 package de.cgarbs.apsynth.signal.library;
 
+import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
@@ -50,7 +51,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
             }
              */
             
-            double x = (tick+shift) / 44100 * freq; 
+            double x = (tick+shift) / Apsynth.samplefreq * freq; 
             return (x - Math.floor(x))*2-1;
 
         }
@@ -58,6 +59,10 @@ public class SawtoothWaveClass extends DefaultSignalClass {
         private SawtoothWave(Signal frequency) {
             this.frequency = frequency;
             
+        }
+
+        public boolean isEnveloped() {
+            return false;
         }
 
     }
@@ -74,8 +79,12 @@ public class SawtoothWaveClass extends DefaultSignalClass {
         }
 
         private ConstantSawtoothWave(Signal frequency) {
-            this.factor = frequency.get(0, 0) / 44100;
+            this.factor = frequency.get(0, 0) / Apsynth.samplefreq;
             
+        }
+
+        public boolean isEnveloped() {
+            return false;
         }
 
     }

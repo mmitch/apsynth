@@ -27,5 +27,9 @@ public class NullClass extends DefaultSignalClass {
             return 0;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

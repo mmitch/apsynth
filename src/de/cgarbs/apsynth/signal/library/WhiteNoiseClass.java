@@ -27,5 +27,9 @@ public class WhiteNoiseClass extends DefaultSignalClass {
             return Math.random() * 2 - 1;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

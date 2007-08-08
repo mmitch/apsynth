@@ -47,7 +47,9 @@ public class HighPassClass extends DefaultSignalClass {
         private HashMap<String,DataBlock> cache = new HashMap<String,DataBlock>();
         private String lastKey;
         private String newKey;
-        
+
+        private boolean enveloped;
+
         public double get(long t, long l) {
         	newKey = getHashKey(t, l);
         	if (! newKey.equals(lastKey) ) {
@@ -74,6 +76,8 @@ public class HighPassClass extends DefaultSignalClass {
         	lastKey = "";
 
             this.filter = new FiniteImpulseResponse(signal, new DataBlock(new double[]{1}));
+
+            enveloped = signal.isEnveloped();
         }
         
         private String getHashKey(long t, long l) {
@@ -145,5 +149,9 @@ public class HighPassClass extends DefaultSignalClass {
     		
         }
                 
-    }
+        public boolean isEnveloped() {
+            return enveloped;
+        }
+
+}
 }

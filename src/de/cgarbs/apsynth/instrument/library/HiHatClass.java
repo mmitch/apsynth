@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.instrument.library;
 
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.EnvelopeNote;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.library.ADSREnvelopeClass.ADSREnvelope;
@@ -28,7 +29,7 @@ public class HiHatClass extends DefaultInstrumentClass {
         
         public Note play(Signal freq, long length) {
             
-            return new Note(
+            return new EnvelopeNote(
                     Pool.getSignalClass("Amplifier").instantiate(new Signal[]{
                             Pool.getSignalClass("WhiteNoise").instantiate(new Signal[]{}),
                             new ADSREnvelope(length, 10, 7000, 0, 300)   

@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.instrument.library;
 
 import de.cgarbs.apsynth.instrument.Instrument;
 import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.note.FixNote;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
 
@@ -38,7 +39,7 @@ public class SampleClass extends DefaultInstrumentClass {
         	de.cgarbs.apsynth.signal.library.SampleClass.Sample sample =
         			(de.cgarbs.apsynth.signal.library.SampleClass.Sample) Pool.getSignalClass("Sample").instantiate(new Signal[]{});
         	sample.setSample(sampleName);
-            return new Note(
+            return new FixNote(
             		sample,
                     length
                     );

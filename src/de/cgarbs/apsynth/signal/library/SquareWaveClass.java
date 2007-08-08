@@ -55,5 +55,9 @@ public class SquareWaveClass extends DefaultSignalClass {
             this.duty = duty;
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
+
     }
 }

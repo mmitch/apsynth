@@ -37,6 +37,7 @@ public class LowPassClass extends DefaultSignalClass {
     public static class LowPass implements Signal {
 
         private Signal filter;
+        private boolean enveloped;
         
         public double get(long t, long l) {
             return filter.get(t, l);
@@ -92,7 +93,12 @@ public class LowPassClass extends DefaultSignalClass {
 
             this.filter = Pool.getSignalClass("FiniteImpulseResponse").instantiate(new Signal[]{signal, coeff});
 
+            enveloped = signal.isEnveloped();
         }
         
+        public boolean isEnveloped() {
+            return enveloped;
+        }
+
     }
 }

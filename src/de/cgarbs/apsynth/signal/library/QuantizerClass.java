@@ -23,6 +23,7 @@ public class QuantizerClass extends DefaultSignalClass {
 
         private Signal signal;
         private Signal quant;
+        private boolean enveloped;
         
         public double get(long tick, long local) {
             double q = quant.get(tick, local); // cache for speedup
@@ -36,6 +37,11 @@ public class QuantizerClass extends DefaultSignalClass {
         private Quantizer(Signal signal, Signal quant) {
             this.signal = signal;
             this.quant  = quant;
+            enveloped = signal.isEnveloped();
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }

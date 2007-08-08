@@ -36,6 +36,9 @@ public class RegisterClass extends DefaultSignalClass {
             ary.put(tick, value);
         }
 
+        public boolean isEnveloped() {
+            return false;
+        }
     }
     
     public static boolean isRegister(String token) {

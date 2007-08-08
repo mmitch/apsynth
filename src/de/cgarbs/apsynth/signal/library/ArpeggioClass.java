@@ -35,6 +35,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private int current = 0;
         private Signal lengthInMs;
         private Vector<Signal> signals = new Vector<Signal>();
+        private boolean enveloped;
         
         public double get(long t, long l) {
             if (startTick == -1) {
@@ -54,9 +55,14 @@ public class ArpeggioClass extends DefaultSignalClass {
             this.lengthInMs = s[0];
             for (int i=1; i<s.length; i++) {
                 signals.add(s[i]);
+                this.enveloped = this.enveloped || s[i].isEnveloped();
             }
         }
         
+        public boolean isEnveloped() {
+            return enveloped;
+        }
+
     }
 
     public class ConstantArpeggio implements Signal {
@@ -65,6 +71,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private int current = 0;
         private double lengthInTicks;
         private Vector<Signal> signals = new Vector<Signal>();
+        private boolean enveloped;
         
         public double get(long t, long l) {
             if (startTick == -1) {
@@ -84,8 +91,13 @@ public class ArpeggioClass extends DefaultSignalClass {
             this.lengthInTicks = s[0].get(0, 0) * Apsynth.samplefreq / 1000;
             for (int i=1; i<s.length; i++) {
                 signals.add(s[i]);
+                this.enveloped = this.enveloped || s[i].isEnveloped();
             }
         }
         
+        public boolean isEnveloped() {
+            return enveloped;
+        }
+
     }
 }

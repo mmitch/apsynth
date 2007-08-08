@@ -29,6 +29,7 @@ public class ClipperClass extends DefaultSignalClass {
 
         private Signal signal;
         private Signal clip;
+        private boolean enveloped;
         
         public double get(long tick, long local) {
             double s = signal.get(tick, local);
@@ -48,6 +49,11 @@ public class ClipperClass extends DefaultSignalClass {
         private Clipper(Signal signal, Signal clip) {
             this.signal = signal;
             this.clip   = clip;
+            this.enveloped = signal.isEnveloped();
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }
@@ -57,6 +63,7 @@ public class ClipperClass extends DefaultSignalClass {
         private Signal signal;
         private double clipPositive;
         private double clipNegative;
+        private boolean enveloped;
         
         public double get(long tick, long local) {
             double s = signal.get(tick, local);
@@ -76,6 +83,11 @@ public class ClipperClass extends DefaultSignalClass {
             this.signal = signal;
             this.clipPositive = clip.get(0, 0);
             this.clipNegative = -clipPositive;
+            this.enveloped = signal.isEnveloped();
+        }
+
+        public boolean isEnveloped() {
+            return enveloped;
         }
 
     }

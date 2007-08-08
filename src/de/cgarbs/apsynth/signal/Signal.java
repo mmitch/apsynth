@@ -11,4 +11,8 @@ public interface Signal {
 	 */
     public double get(long t, long l);
 	
+    /**
+     * tell if this signal is continously or time-dependend (enveloped)
+     */
+    public boolean isEnveloped();
 }
