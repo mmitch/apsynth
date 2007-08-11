@@ -9,21 +9,30 @@ amp		Amplifier		sine	0.45
 return	Mixer			amp	0.5
 
 define	EnvSquineWave	3
-squine	SquineWave 		var0 var2
-env		ADSREnvelope	var1 1000 0 1 2000
+alias	var0	freq
+alias	var1	length
+alias	var2	squine_cut
+squine	SquineWave 		freq squine_cut
+env		ADSREnvelope	length 1000 0 1 2000
 return	Amplifier		squine env
 
 * testing frequency envelopes
 define	EnvSquareWave	3
+alias	var0	freq
+alias	var1	length
+alias	var2	square_duty
 ent		ADSREnvelope	1000 0 0 1 1500
 ent2	Amplifier		ent 0.001
 ent3	Mixer			ent2 1
-freq	Amplifier		var0 ent3
-square	SquareWave		freq var2
-env		ADSREnvelope	var1 2500 1000 0.8 5000
+freq2	Amplifier		freq ent3
+square	SquareWave		freq2 square_duty
+env		ADSREnvelope	length 2500 1000 0.8 5000
 return	Amplifier		square env
 
 define	EnvSquareWave2	3
-square	SquareWave		var0 var2
-env		ADSREnvelope	var1 50 15000 0 55000
+alias	var0	freq
+alias	var1	length
+alias	var2	square_duty
+square	SquareWave		freq square_duty
+env		ADSREnvelope	length 50 15000 0 55000
 return	Amplifier		square env

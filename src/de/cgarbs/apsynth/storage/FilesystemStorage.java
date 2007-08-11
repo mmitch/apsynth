@@ -76,6 +76,25 @@ public class FilesystemStorage implements StorageBackend {
             				throw new ParseException("Signal definition line with != 2 arguments");
 		            	}
 		            	
+		            // create Alias(es) for a Signal
+		            } else if (token[0].equals("alias")) {
+		            	if (token.length > 2) {
+
+		            		Short originalRuleNumber = signalRulesIndex.get(token[1]);
+		            		if (originalRuleNumber == null) {
+		            			throw new ParseException("unknown alias source " + token[1]);
+		            		}
+		            		
+		            		for (int i=2; i<token.length; i++) {
+			            		if (signalRulesIndex.containsKey(token[i])) {
+			            			throw new ParseException("duplicate signal name in alias "+token[i]);
+			            		}
+			            		signalRulesIndex.put(token[i], originalRuleNumber);
+		            		}
+		            	} else {
+		            		throw new ParseException("signal alias line with < 3 parameters");
+		            	}
+		            	
 		            // definition line
 		            } else {
 		            	if (token.length > 1) {
@@ -83,6 +102,10 @@ public class FilesystemStorage implements StorageBackend {
 		            		String signalName = token[1];
 		            		SignalRule signalRule = null;
 
+		            		if (signalRulesIndex.containsKey(ruleName)) {
+		            			throw new ParseException("duplicate signal name "+ruleName);
+		            		}
+		            		
 		            		SignalClass filterClass = Pool.getSignalClass(signalName);
 	            			int paramCount = filterClass.getParamCount();
 	            			if (paramCount != token.length-2) {
