@@ -3,7 +3,7 @@ speed 0;* don't wait on comments ^_^
 signal	lfo	LFO1
 
 newinstrument EnvSqine EnvSquineWave
-instrument EnvSqine ; * lfo
+instrument EnvSqine lfo
 
 speed 400
 include	lastninja.track.sakuhachi.pattern.00

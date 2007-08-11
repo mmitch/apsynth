@@ -3,7 +3,7 @@ speed 0;* don't wait on comments ^_^
 signal lfo LFO2
 
 newinstrument EnvSquare EnvSquareWave
-instrument EnvSquare; * lfo
+instrument EnvSquare lfo
 
 speed 400
 include	lastninja.track.pattern.pause

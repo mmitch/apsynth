@@ -297,7 +297,8 @@ public class FilesystemStorage implements StorageBackend {
         Sample sample = null;
     	
     	try {
-    		WaveFile in = new WaveFile(identifier+".wav");
+    		String filename = identifier+".wav";
+    		WaveFile in = new WaveFile(filename);
     	
     		// WAV file structure see  http://www.lightlink.com/tjweber/StripWav/Canon.html
     		
@@ -308,11 +309,11 @@ public class FilesystemStorage implements StorageBackend {
     		//  8       4 bytes  'WAVE'
     		
     		if (!in.readString(4).equals("RIFF")) {
-    			throw new RuntimeException("file is no RIFF file");
+    			throw new RuntimeException("file "+filename+" is no RIFF file");
     		}
     		in.readDoubleWord();
     		if (!in.readString(4).equals("WAVE")) {
-    			throw new RuntimeException("file is no WAVE format");
+    			throw new RuntimeException("file "+filename+" is no WAVE format");
     		}
     		// FMT CHUNK
     		//  12      4 bytes  'fmt '
@@ -324,13 +325,13 @@ public class FilesystemStorage implements StorageBackend {
     		//  32      2 bytes  <block align>  // channels * bits/sample / 8
     		//  34      2 bytes  <bits/sample>  // 8 or 16
     		if (!in.readString(4).equals("fmt ")) {
-    			throw new RuntimeException("fmt chunk expected");
+    			throw new RuntimeException(filename+": fmt chunk expected");
     		}
     		if (in.readDoubleWord() != 16) {
-    			throw new RuntimeException("wrong length of format chunk");
+    			throw new RuntimeException(filename+": wrong length of format chunk");
     		}
     		if (in.readWord() != 1) {
-    			throw new RuntimeException("unsupported format (!=PCM)");
+    			throw new RuntimeException(filename+": unsupported format (!=PCM)");
     		}
     		int channels = in.readWord();
     		int samplerate = in.readDoubleWord();
@@ -343,7 +344,7 @@ public class FilesystemStorage implements StorageBackend {
     		//  40      4 bytes  <length of the data block>
     		//  44        bytes  <sample data>
     		if (!in.readString(4).equals("data")) {
-    			throw new RuntimeException("data chunk expected");
+    			throw new RuntimeException(filename+": data chunk expected");
     		}
     		int datalength = in.readDoubleWord();
 
@@ -522,15 +523,11 @@ public class FilesystemStorage implements StorageBackend {
     private InstrumentClass parseInstrumentLine(HashMap<String,Signal> signals, String[] token, int offset) throws ParseException {
         String instrumentName = token[offset];
         String signalName = token[offset+1];
-        // TODO FETTES TODO - Instrumente können keine Parameter!!!
-//        if (token.length == offset + 1) {
-            return new DynamicInstrumentClass(
-                    instrumentName,
-                    signalName
-                    );
-//        } else {
-//            throw new ParseException("wrong argument count at Instrument definition "+instrumentName);
-//        }
+        return new DynamicInstrumentClass(
+        		instrumentName,
+        		signalName,
+        		token.length - offset - 1
+        );
     }
 
 	/**

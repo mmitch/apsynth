@@ -1,7 +1,7 @@
 speed 0;* don't wait on comments ^_^
 
 newinstrument EnvSquare2 EnvSquareWave2
-instrument EnvSquare2; * 0.5
+instrument EnvSquare2 0.5
 
 speed 400
 include	lastninja.track.pattern.pause

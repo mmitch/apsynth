@@ -15,9 +15,10 @@ public class DynamicInstrumentClass extends InstrumentClass {
     private String name = "unnamedDynamicInstrumentClass";
     private String signal = "Null";
     
-    public DynamicInstrumentClass(String name, String signal) {
+    public DynamicInstrumentClass(String name, String signal, int paramCount) {
         this.name = name;
         this.signal = signal;
+        this.paramCount = paramCount;
     }
     
     public Instrument instanciate(Signal[] s) {
