@@ -16,7 +16,10 @@ class WaveFile extends RandomAccessFile {
 
     public WaveFile(String filename) throws FileNotFoundException, IOException {
         super(filename, "rw");
-        setLength(0);
+    }
+
+    public void clearFile() throws IOException {
+    	setLength(0);
     }
 
     public void writeString(String s) throws IOException {
