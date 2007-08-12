@@ -1,0 +1,3 @@
+signals basedrum.signal
+bd		Track	basedrum.1
+return	bd		/tmp/basedrum.wav

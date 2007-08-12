@@ -1,0 +1,8 @@
+define	BaseDrum	2
+alias	var0	freq
+alias	var1	length
+env1	ADSREnvelope	0 0 0 1 length
+env2	Amplifier		env1 180
+env3	Mixer			env2 20
+sine	SineWave		env3
+return	Amplifier		sine	env1
