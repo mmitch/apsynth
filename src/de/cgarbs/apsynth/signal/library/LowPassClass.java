@@ -1,7 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.Apsynth;
-import de.cgarbs.apsynth.internal.Pool;
+import de.cgarbs.apsynth.signal.PassFilter;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.library.DataBlockClass.DataBlock;
 import dsp.RemezFIRFilter;
@@ -34,14 +34,7 @@ public class LowPassClass extends DefaultSignalClass {
 		return "LowPass";
 	}
 
-    public static class LowPass implements Signal {
-
-        private Signal filter;
-        private boolean enveloped;
-        
-        public double get(long t, long l) {
-            return filter.get(t, l);
-        }
+    public static class LowPass extends PassFilter {
 
         /**
          * 0: input signal
@@ -50,9 +43,11 @@ public class LowPassClass extends DefaultSignalClass {
          * 3: stopband attenuation [dB]
          * 4: passband ripple [dB]
          */
-        private LowPass(Signal signal, Signal s_cutoff, Signal s_trband, Signal s_atten, Signal s_ripple) {
-
-            // TODO: make filters changeable after initialization (lookout: needs cache)
+        public LowPass(Signal signal, Signal s_cutoff, Signal s_trband, Signal s_atten, Signal s_ripple) {
+            super(signal, s_cutoff, s_trband, s_atten, s_ripple);
+        }
+        
+        protected void updateFilter(long t, long l) {
             
             // taken from RemezFIRFilterDesign.java
             int numBands = 2;
@@ -91,13 +86,9 @@ public class LowPassClass extends DefaultSignalClass {
                     new RemezFIRFilter().remez(numTaps, bands, desired, weights, RemezFIRFilter.BANDPASS)
             );
 
-            this.filter = Pool.getSignalClass("FiniteImpulseResponse").instantiate(new Signal[]{signal, coeff});
-
-            enveloped = signal.isEnveloped();
-        }
-        
-        public boolean isEnveloped() {
-            return enveloped;
+            cache.put(newKey, coeff);
+            
+            filter.updateTaps(coeff);
         }
 
     }
