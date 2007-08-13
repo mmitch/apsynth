@@ -44,7 +44,7 @@ public class HighPassClass extends DefaultSignalClass {
         private Signal s_atten;
         private Signal s_ripple;
         
-        private HashMap<String,DataBlock> cache = new HashMap<String,DataBlock>();
+        static private HashMap<String,DataBlock> cache = new HashMap<String,DataBlock>();
         private String lastKey;
         private String newKey;
 
@@ -153,5 +153,5 @@ public class HighPassClass extends DefaultSignalClass {
             return enveloped;
         }
 
-}
+    }
 }
