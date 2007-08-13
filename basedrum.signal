@@ -6,3 +6,19 @@ env2	Amplifier		env1 180
 env3	Mixer			env2 20
 sine	SineWave		env3
 return	Amplifier		sine	env1
+
+define	SnareDrum	2
+alias	var0	freq
+alias	var1	length
+env		ADSREnvelope	0 0 0 1 length
+noise	WhiteNoise
+signal	Amplifier		noise	env
+return	LowPass	signal	8000 400 40 5
+
+define	HiHat	2
+alias	var0	freq
+alias	var1	length
+env		ADSREnvelope	0 0 0 .7 length
+noise	WhiteNoise
+signal	Amplifier		noise	env
+return	HighPass	signal	6000 400 50 2

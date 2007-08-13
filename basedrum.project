@@ -1,3 +1,10 @@
 signals basedrum.signal
 bd		Track	basedrum.1
-return	bd		/tmp/basedrum.wav
+sn		Track	snare
+hh		Track	hihat
+bda		Amplifier	bd	.5
+sna		Amplifier	sn	.6
+hha		Amplifier	hh	.5
+mix1	Mixer		bda	sna
+mix2	Mixer		mix1 hha
+return	mix2		/tmp/basedrum.wav
