@@ -32,7 +32,6 @@ public class UndersampleClass extends DefaultSignalClass {
         public double get(long tick, long local) {
             
             if ( step.get(tick, local) != lastStep ) {
-                System.out.println(tick);
                 lastStep = step.get(tick, local);
             }
             
