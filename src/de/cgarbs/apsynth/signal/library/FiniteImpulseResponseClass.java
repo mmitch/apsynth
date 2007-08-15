@@ -87,7 +87,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
             // store new signal in ringbuffer
             head++;
-            if (head == tapcount) {
+            if (head >= tapcount) {
                 head = 0;
             }
             buffer[head] = signal.get(tick, local);
