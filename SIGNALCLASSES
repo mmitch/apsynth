@@ -86,6 +86,12 @@ SquineWave    generate sine/squarewave crossbreed
                   0 == square
                   1 == sine
 -------------------------------------------------
+Undersample   the opposite of oversampling:
+              return one input signal over a
+              specified amount
+              1 = the signal to process
+              2 = ticks to keep signal
+-------------------------------------------------
 WhiteNoise    random signal from [-1;1]
               n/a
 -------------------------------------------------

@@ -1,0 +1,6 @@
+speed 0;
+newinstrument	RaisingSine raisingsine 	
+instrument		RaisingSine
+speed 100;
+
+a2 4;

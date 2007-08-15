@@ -1,0 +1,3 @@
+signals	./undersample.signal
+track	Track	undersample.track
+return	track	/tmp/undersample.wav

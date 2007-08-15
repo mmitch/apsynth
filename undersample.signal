@@ -1,0 +1,10 @@
+define	raisingsine 2
+alias	var0	freq
+alias	var1	length
+e1		ADSREnvelope	length length 0 0 0
+e2		ADSREnvelope	length 0 0 1 0
+em		Mixer			e1 1
+us		Undersample		em	10000
+f		Amplifier		freq us
+s		SineWave		f
+return	Amplifier		s e2
