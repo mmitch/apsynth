@@ -106,7 +106,7 @@ public class Apsynth {
         // wait for 0.5s pause
         SilenceDetector s = new SilenceDetector();
         while (! s.isSilent()) {
-            s.monitor(mainSignal.write(tick));
+            s.monitor(mainSignal.write(tick), tick);
 
             if (tick % samplefreq == 0) {
                 timestamp(tick);

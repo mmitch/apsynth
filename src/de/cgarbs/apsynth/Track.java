@@ -14,8 +14,11 @@ public class Track implements Signal {
     Vector<Note> activeNotes = new Vector<Note>();
     Map<Long,Vector<Note>> queue = new HashMap<Long,Vector<Note>>();
     
+    long lastTick;
+    
     public Track() {
         Pool.registerTrack(this);
+        this.lastTick = 0;
     }
     
     public void queueNote(Note note, long time) {
@@ -33,17 +36,20 @@ public class Track implements Signal {
     
     public double get(long tick, long local) {
         double signal = 0;
-        
-        // check for new notes to be played
-        Long key = new Long(tick);
-        if (queue.containsKey(key)) {
-            Vector newNotes = (Vector) queue.remove(key);
-            Enumeration e = newNotes.elements();
-            for (; e.hasMoreElements(); ) {
-                activeNotes.add( (Note) e.nextElement());
+
+        for (long checkTick = lastTick; checkTick <= tick; checkTick++) {
+            // check for new notes to be played
+            Long key = new Long(checkTick);
+            if (queue.containsKey(key)) {
+                Vector newNotes = (Vector) queue.remove(key);
+                Enumeration e = newNotes.elements();
+                for (; e.hasMoreElements(); ) {
+                    activeNotes.add( (Note) e.nextElement());
+                }
             }
         }
-
+        lastTick = tick;
+    
         // play and remove existing notes
         Enumeration e = activeNotes.elements();
         for (; e.hasMoreElements(); ) {

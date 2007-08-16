@@ -10,6 +10,7 @@ public class SilenceDetector {
 
     private long length;
     private long silence;
+    private long lastTick;
     
     /**
      * default silence detection for 0.5s
@@ -26,6 +27,7 @@ public class SilenceDetector {
     public SilenceDetector(long length) {
         this.length  = length;
         this.silence = 0;
+        this.lastTick = 0;
     }
     
     /**
@@ -33,12 +35,13 @@ public class SilenceDetector {
      * @param value signal value to monitor
      * @return the input value for convenience
      */
-    public double monitor(double value) {
+    public double monitor(double value, long tick) {
         if (value < 0.001) {
-            silence++;
+            silence += (tick-lastTick);
         } else {
             silence = 0;
         }
+        lastTick = tick;
         return value;
     }
     

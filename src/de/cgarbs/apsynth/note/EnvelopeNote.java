@@ -14,7 +14,7 @@ public class EnvelopeNote extends Note {
     }
 
     public double get(long tick, long local) {
-        return s.monitor(signal.get(tick, localTick++));
+        return s.monitor(signal.get(tick, localTick++), tick);
     }
     
     public boolean isFinished() {
