@@ -1,0 +1,252 @@
+START_SIGNALS
+define	BaseDrum	2
+alias	var0	freq
+alias	var1	length
+env1	ADSREnvelope	0 0 0 1 length
+env2	Amplifier		env1 180
+env3	Mixer			env2 20
+sine	SineWave		env3
+return	Amplifier		sine	env1
+
+define	SnareDrum	2
+alias	var0	freq
+alias	var1	length
+env		ADSREnvelope	0 0 0 1 length
+noise	WhiteNoise
+signal	Amplifier		noise	env
+return	LowPass	signal	8000 400 40 5
+
+define	HiHat	2
+alias	var0	freq
+alias	var1	length
+env		ADSREnvelope	0 0 0 .7 length
+noise	WhiteNoise
+signal	Amplifier		noise	env
+return	HighPass	signal	6000 400 50 2
+END_SIGNALS
+
+
+bd		Track	START_TRACK
+speed 0;
+newinstrument	basedrum	BaseDrum;
+instrument basedrum;
+speed 400;
+a2 1;R_quant 8;R_under 2
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;R_quant 7
+;
+;
+;
+a2 1;
+;
+a2 1;
+;* *
+a2 1;R_quant 6;R_under 3
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;R_quant 5
+;
+;
+;
+a2 1;
+;
+;
+a2 1; * *
+a2 1;R_quant 4;R_under 4
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;R_quant 3
+;
+;
+;
+a2 1;
+;
+a2 1;
+; * *
+a2 1;R_quant 2;R_under 5
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;R_quant 1
+;
+;
+;
+a2 1;
+;
+;
+; * *
+END_TRACK
+
+
+sn		Track	START_TRACK
+speed 0;
+newinstrument	snaredrum	SnareDrum;
+instrument snaredrum;
+speed 400;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+; * *
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+; * *
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+; * *
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+;
+;
+;
+a2 1;
+; * *
+END_TRACK
+
+
+hh		Track	START_TRACK
+speed 0;
+newinstrument	hihat	HiHat;
+instrument hihat;
+speed 400;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 2;
+; * *
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 2;
+; * *
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;a2 2
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 2;
+; * *
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+a2 .3;
+;
+;
+; * *
+END_TRACK
+
+
+bda		Amplifier	bd	.5
+sna		Amplifier	sn	.6
+hha		Amplifier	hh	.5
+mix1	Mixer		bda	sna
+mix2	Mixer		mix1 hha
+mix3	Quantizer	mix2 R_quant
+mix4	Undersample	mix2 R_under
+return	mix4		/tmp/drumtest.wav
