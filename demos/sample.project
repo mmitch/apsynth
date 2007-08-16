@@ -1,0 +1,15 @@
+*
+sample Track	START_TRACK
+speed 0;* don't wait on comments ^_^
+sample hihat_closed
+speed 400
+a2 4
+a2 4
+a2 4
+a2 4
+END_TRACK
+
+return	sample	/tmp/sample.wav
+
+* sample_f	LowPass	sample 6000 95 45 5
+* return sample_f /tmp/sample.wav

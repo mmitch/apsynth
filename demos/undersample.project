@@ -1,3 +1,4 @@
+START_SIGNALS
 define	raisingsine 2
 alias	var0	freq
 alias	var1	length
@@ -8,3 +9,15 @@ us		Undersample		em	10000
 f		Amplifier		freq us
 s		SineWave		f
 return	Amplifier		s e2
+END_SIGNALS
+
+track	Track	START_TRACK
+speed 0;
+newinstrument	RaisingSine raisingsine 	
+instrument		RaisingSine
+speed 100;
+
+a2 4;
+END_TRACK
+
+return	track	/tmp/undersample.wav

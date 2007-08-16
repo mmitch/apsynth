@@ -1,3 +1,36 @@
+* This is the main Apsynth project definition file.
+* ----------------------------------------------------------------
+* Comments are started with "* ".
+* Tokens are separated by whitespace(s).
+*
+* Every line in the form
+* <name>  <SignalClass>  [<parameter> [<...>]]
+* defines a new Signal <name> of type <SignalClass>.
+* Parameters vary depending on <SignalClass> (see SIGNALCLASSES).
+*
+* "Track" is a special <SignalClass>, it reads a track definition.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "instruments" is a special <name>, it reads instrument definitions.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "signals" is a special <name>, it reads a signal definition.
+* First parameter is the filename to read from.
+* (no spaces allowed for obvious reasons)
+*
+* "return" is a special <name>, it defines the final file output:
+* First parameter is the name of the signal to write to disk.
+* Second parameter is the filename to write to.
+* (no spaces allowed for obvious reasons)
+*
+* ----------------------------------------------------------------
+* load signal definitions from signal.1
+signals	signal.1
+* ----------------------------------------------------------------
+* inline track definition
+lead	Track	START_TRACK
 speed 0;* don't wait on comments ^_^
 *
 * This is an apsynth track file.
@@ -33,7 +66,7 @@ speed 0;* don't wait on comments ^_^
 * ----------------------------------------------------------------
 signal	lfo	LFO1
 R_cutoff 300
-instrument Square lfo; speed 130
+instrument Square lfo; speed 250
 g3 0.9;* ( 1)
 g4 0.9;R_cutoff 300
 a4 0.9
@@ -106,3 +139,12 @@ h4 0.9
 g4 0.9
 a4 0.9
 h4 0.9
+END_TRACK
+
+echo	OwnSignal	lead
+*
+* test filter sweep
+filter	HighPass	echo R_cutoff 95 45 5
+*
+* Write to disk
+return	filter	/tmp/test.wav

@@ -26,15 +26,27 @@
 * (no spaces allowed for obvious reasons)
 *
 * ----------------------------------------------------------------
-* load signal definitions from signal.1
-signals	signal.1
+* load signal definitions from jesu.signal
+signals	jesu.signal
 * ----------------------------------------------------------------
 * Load the Track from jesu.1, turn the volume down and add an echo
-lead	Track	sweeptest.track
-echo	OwnSignal	lead
+lead	Track	jesu.1
+echo_l	OwnSignal	lead
 *
-* test filter sweep
-filter	HighPass	echo R_cutoff 95 45 5
+* Load the Track from jesu.2, turn the volume down and add an echo
+* Echo reamplification is mapped to register R_EchoReAmp
+bass	Track	jesu.2
+amp_b	Amplifier	bass	0.3
+echo_b	DelayEcho	amp_b	250	0.4	R_EchoReAmp
+*
+* Mix both channels together
+mix	Mixer	echo_l	echo_b
+*
+* test FIR
+taps	DataBlock 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1 0 0 0.1
+fir		FiniteImpulseResponse mix taps
 *
 * Write to disk
-return	filter	/tmp/test.wav
+return	fir	/tmp/test.wav
+
+
