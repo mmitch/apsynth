@@ -33,6 +33,9 @@ public class UndersampleClass extends DefaultSignalClass {
             
             if ( step.get(tick, local) != lastStep ) {
                 lastStep = step.get(tick, local);
+                if (lastStep < 1) {
+                    lastStep = 1;
+                }
             }
             
             if ((tick < thisTick) || (tick >= nextTick)) {
@@ -57,6 +60,9 @@ public class UndersampleClass extends DefaultSignalClass {
             this.nextTick = -1;
             this.lastVal = signal.get(0,0);
             this.lastStep = step.get(0,0);
+            if (lastStep < 1) {
+                lastStep = 1;
+            }
         }
 
         public boolean isEnveloped() {
