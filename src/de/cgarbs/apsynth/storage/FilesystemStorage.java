@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -240,10 +241,11 @@ public class FilesystemStorage implements StorageBackend {
                 
                 try {
                     for (int c = 0; c < commands.length; c++) {
-                        String[] token = commands[c].split("\\s+");
+                        String command = commands[c];
+                        String[] token = command.split("\\s+");
                         
                         // empty line
-                        if (line.length() == 0 || token.length == 0) {
+                        if (command.length() == 0 || token.length == 0) {
     
                         // comment line
                         } else if (token[0].equals("*")) {
@@ -341,6 +343,8 @@ public class FilesystemStorage implements StorageBackend {
                             Note note = instrument.play(token[0], (long)(Double.parseDouble(token[1]) * step));
                             track.queueNote(note, (long)position);
                          
+                        } else {
+                            throw new ParseException("unparseable command `" + command + "' in line: `"+ line+ "'");
                         }
                         
                     }
@@ -368,7 +372,7 @@ public class FilesystemStorage implements StorageBackend {
     	
     	try {
     		String filename = identifier+".wav";
-    		WaveFile in = new WaveFile(filename);
+    		WaveFile in = new WaveFile(getDir()+filename);
     	
     		// WAV file structure see  http://www.lightlink.com/tjweber/StripWav/Canon.html
     		
@@ -528,12 +532,16 @@ public class FilesystemStorage implements StorageBackend {
 		            	}
 		            }
             	} catch (ParseException p) {
-            		throw new RuntimeException(p.getMessage()+" [in "+in.getPosition()+"]", p);
+                    throw new RuntimeException(p.getMessage()+" [in "+in.getPosition()+"]", p);
             	}
             		
             }
             
             in.close();
+            
+            if (w == null) {
+                throw new RuntimeException("no return signal given [in "+filename+"]");
+            }
             
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -668,17 +676,33 @@ public class FilesystemStorage implements StorageBackend {
         
         private long lineCount;
         private String fileName;
+        private String pathName;
         
         MyFileReader(String fileName) throws FileNotFoundException {
-            super(new FileReader(fileName));
+            super(new FileReader(getDir()+fileName));
             this.fileName = fileName;
             this.lineCount = 0;
+            this.pathName = new File(fileName).getParent();
+            if (pathName == null) {
+                pathName = ""; 
+            }
+            pushDir(pathName);
+        }
+
+        @Override
+        public void close() throws IOException {
+            super.close();
+            popDir();
         }
 
         @Override
         public String readLine() throws IOException {
             lineCount++;
             return super.readLine();
+        }
+
+        public String getPathName() {
+            return pathName;
         }
 
         public String getFileName() {
@@ -690,9 +714,30 @@ public class FilesystemStorage implements StorageBackend {
         }
         
         public String getPosition() {
-            return "file `"+fileName+"', line "+lineCount;
+            return "path `"+pathName+"', file `"+fileName+"', line "+lineCount;
         }
         
     }
+
+    /**
+     * Totally lame static(!) reconstruction of pwd/cwd OS behavious
+     */
+    private static Vector<String> directories = new Vector<String>();
+    private static String getDir() {
+        if (directories.isEmpty()) {
+            return "";
+        }
+        return directories.lastElement();
+    }
+    private static void pushDir(String path) {
+        if (path.length() > 0) {
+            path += File.separator;
+        }
+        directories.add(path);
+    }
+    private static void popDir() {
+        directories.removeElementAt(directories.size()-1);
+    }
+    
     
 }
