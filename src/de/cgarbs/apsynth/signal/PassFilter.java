@@ -59,10 +59,10 @@ abstract public class PassFilter implements Signal {
     private String getHashKey(long t, long l) {
     	StringBuffer b = new StringBuffer();
     	b.append(maxTaps).append(':');
-    	b.append(s_cutoff.get(t, l)).append(':');
-    	b.append(s_trband.get(t, l)).append(':');
-    	b.append(s_atten.get(t, l) ).append(':');
-    	b.append(s_ripple.get(t, l)).append(':');
+    	b.append(s_cutoff.get(t, l).getMono()).append(':');
+    	b.append(s_trband.get(t, l).getMono()).append(':');
+    	b.append(s_atten.get( t, l).getMono()).append(':');
+    	b.append(s_ripple.get(t, l).getMono()).append(':');
     	return b.toString();
     }
     
