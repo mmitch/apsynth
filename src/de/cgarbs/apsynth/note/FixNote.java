@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.note;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class FixNote extends Note {
 
@@ -12,7 +13,7 @@ public class FixNote extends Note {
         return localTick >= duration;
     }
 
-    public double get(long tick, long local) {
+    public Stereo get(long tick, long local) {
         return signal.get(tick, localTick++);
     }
 

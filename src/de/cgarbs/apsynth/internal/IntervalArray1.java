@@ -3,7 +3,9 @@ package de.cgarbs.apsynth.internal;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class IntervalArray1 extends TreeMap<Long,Double> implements IntervalArray {
+import de.cgarbs.apsynth.signal.Stereo;
+
+public class IntervalArray1 extends TreeMap<Long,Stereo> implements IntervalArray {
 
     /**
      * 
@@ -14,17 +16,17 @@ public class IntervalArray1 extends TreeMap<Long,Double> implements IntervalArra
     long lastHi = -1;
     double lastValue = 0;
     
-    public double get(long key) {
+    public Stereo get(long key) {
         Long k = new Long(key);
-        Double ret = (Double)super.get(k);
+        Stereo ret = super.get(k);
         
         if (ret == null) {
             SortedMap lowerValues = this.headMap(k);
             if (lowerValues != null) {
-                ret = (Double)super.get(lowerValues.lastKey());
+                ret =super.get(lowerValues.lastKey());
             } 
         }
-        return ret.doubleValue();
+        return ret;
 
         /*
          
@@ -53,7 +55,7 @@ public class IntervalArray1 extends TreeMap<Long,Double> implements IntervalArra
         */
     }
 
-    public void put(long key, double value) {
-        put(new Long(key), new Double(value));
+    public void put(long key, Stereo value) {
+        put(new Long(key), value);
     }
 }

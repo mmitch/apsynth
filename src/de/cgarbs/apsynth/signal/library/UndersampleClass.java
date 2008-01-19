@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class UndersampleClass extends DefaultSignalClass {
 
@@ -27,19 +28,19 @@ public class UndersampleClass extends DefaultSignalClass {
         private Signal step;
         private boolean enveloped;
         private long thisTick, nextTick;
-        private double lastStep, lastVal;
+        private Stereo lastStep, lastVal;
         
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
             
-            if ( step.get(tick, local) != lastStep ) {
+            if ( ! step.get(tick, local).equals(lastStep) ) {
                 lastStep = step.get(tick, local);
-                if (lastStep < 1) {
-                    lastStep = 1;
+                if (lastStep.getMono() < 1) {
+                    lastStep = new Stereo(1);
                 }
             }
             
             if ((tick < thisTick) || (tick >= nextTick)) {
-                long newStep = (long) Math.abs(lastStep);
+                long newStep = (long) Math.abs(lastStep.getMono());
                 thisTick = (tick / newStep) * newStep;
                 nextTick = thisTick + newStep;
                 lastVal = signal.get(tick, local);
@@ -60,8 +61,8 @@ public class UndersampleClass extends DefaultSignalClass {
             this.nextTick = -1;
             this.lastVal = signal.get(0,0);
             this.lastStep = step.get(0,0);
-            if (lastStep < 1) {
-                lastStep = 1;
+            if (lastStep.getMono() < 1) {
+                lastStep = new Stereo(1);
             }
         }
 

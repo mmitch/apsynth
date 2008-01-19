@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class WhiteNoiseClass extends DefaultSignalClass {
 
@@ -23,8 +24,8 @@ public class WhiteNoiseClass extends DefaultSignalClass {
             // no-op: no parameters 
         }
 
-        public double get(long tick, long local) {
-            return Math.random() * 2 - 1;
+        public Stereo get(long tick, long local) {
+            return new Stereo(Math.random() * 2 - 1, Math.random() * 2 - 1);
         }
 
         public boolean isEnveloped() {

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.note;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public abstract class Note implements Signal {
 
@@ -13,7 +14,7 @@ public abstract class Note implements Signal {
         this.duration = duration;
     }
 
-    abstract public double get(long tick, long local);
+    abstract public Stereo get(long tick, long local);
     
     abstract public boolean isFinished();
 
@@ -23,7 +24,7 @@ public abstract class Note implements Signal {
      */
     public void setParameters(Signal[] s) {
         this.signal = s[0];
-        this.duration = (long)s[0].get(0, 0);
+        this.duration = (long)s[0].get(0, 0).getMono();
     }
 
     abstract public boolean isEnveloped();

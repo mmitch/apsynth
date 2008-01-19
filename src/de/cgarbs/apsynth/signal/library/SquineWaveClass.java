@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class SquineWaveClass extends DefaultSignalClass {
@@ -32,12 +33,16 @@ public class SquineWaveClass extends DefaultSignalClass {
         private Signal sound = null;
         private boolean enveloped;
         
-        public double get(long tick, long local) {
-            double normalize = sound.get(tick, local);
-            if (normalize != 0) {
-                normalize = 1/normalize;
+        public Stereo get(long tick, long local) {
+            Stereo normalize = sound.get(tick, local);
+            if (normalize.l != 0) {
+                normalize.l = 1/normalize.l;
             }
-            return clipped.get(tick, local) * normalize;
+            if (normalize.r != 0) {
+                normalize.r = 1/normalize.r;
+            }
+            Stereo clip = clipped.get(tick, local);
+            return new Stereo(clip.l * normalize.l, clip.r * normalize.r);
         }
 
         private SquineWave(Signal frequency, Signal sound) {
@@ -57,19 +62,23 @@ public class SquineWaveClass extends DefaultSignalClass {
     public class ConstantSquineWave implements Signal {
 
         private Signal clipped = null;
-        private double normalize = 0;
+        private Stereo normalize;
         private boolean enveloped = false;
         
-        public double get(long tick, long local) {
-            return clipped.get(tick, local) * normalize;
+        public Stereo get(long tick, long local) {
+            Stereo clip = clipped.get(tick, local);
+            return new Stereo(clip.l * normalize.l, clip.r * normalize.r);
         }
 
         private ConstantSquineWave(Signal frequency, Signal sound) {
             Signal sine  = Pool.getSignalClass("SineWave").instantiate(new Signal[]{frequency});
             this.clipped = Pool.getSignalClass("Clipper").instantiate(new Signal[]{sine, sound});
             this.normalize = sound.get(0, 0);
-            if (normalize!= 0) {
-                normalize = 1/normalize;
+            if (normalize.l != 0) {
+                normalize.l = 1/normalize.l;
+            }
+            if (normalize.r != 0) {
+                normalize.r = 1/normalize.r;
             }
 
             enveloped = clipped.isEnveloped();

@@ -8,6 +8,7 @@ import java.util.Vector;
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.note.Note;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class Track implements Signal {
     
@@ -34,8 +35,8 @@ public class Track implements Signal {
         }
     }
     
-    public double get(long tick, long local) {
-        double signal = 0;
+    public Stereo get(long tick, long local) {
+        Stereo signal = new Stereo();
 
         for (long checkTick = lastTick; checkTick <= tick; checkTick++) {
             // check for new notes to be played
@@ -54,7 +55,7 @@ public class Track implements Signal {
         Enumeration e = activeNotes.elements();
         for (; e.hasMoreElements(); ) {
             Note note = (Note)e.nextElement(); 
-            signal += note.get(tick, local);
+            signal.mix(note.get(tick, local));
             if (note.isFinished()) {
                 activeNotes.remove(note);
             }
