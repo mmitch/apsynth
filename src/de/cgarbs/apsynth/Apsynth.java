@@ -27,6 +27,7 @@ import de.cgarbs.apsynth.signal.library.SawtoothWaveClass;
 import de.cgarbs.apsynth.signal.library.SineWaveClass;
 import de.cgarbs.apsynth.signal.library.SquareWaveClass;
 import de.cgarbs.apsynth.signal.library.SquineWaveClass;
+import de.cgarbs.apsynth.signal.library.StereoPositionClass;
 import de.cgarbs.apsynth.signal.library.UndersampleClass;
 import de.cgarbs.apsynth.signal.library.WhiteNoiseClass;
 import de.cgarbs.apsynth.storage.FilesystemStorage;
@@ -62,6 +63,7 @@ public class Apsynth {
         Pool.registerSignalClass(new ADSREnvelopeClass());
         Pool.registerSignalClass(new de.cgarbs.apsynth.signal.library.SampleClass());
         Pool.registerSignalClass(new UndersampleClass());
+        Pool.registerSignalClass(new StereoPositionClass());
 
         Pool.registerInstrumentClass(new SineClass());
         Pool.registerInstrumentClass(new SquareClass());

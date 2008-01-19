@@ -7,11 +7,13 @@ signals lastninja.signals
 saku	Track		lastninja.track.sakuhachi
 saku_f	LowPass		saku 7000 95 45 5
 saku_a	Amplifier	saku_f	0.2
-saku_e	DelayEcho	saku_a	40 0.2 0.2
+saku_s	StereoPosition	saku_a	0.7
+saku_e	DelayEcho	saku_s	40 0.2 0.2
 *
 pan		Track		lastninja.track.pan-flute
 pan_f	LowPass		pan 6000 95 45 5
 pan_a	Amplifier	pan_f		0.4
+pan_s	StereoPosition	pan_a		-0.6
 *
 cutz 	Track		lastninja.track.cutz
 cutz_f	LowPass		cutz 6000 95 45 5
@@ -23,7 +25,7 @@ cutz_a	Amplifier	cutz_f	0.2
 * drums	Mixer		hihat_a	0
 drums	Mixer		0	0
 *
-mix1	Mixer		saku_e pan_a
+mix1	Mixer		saku_e pan_s
 mix2	Mixer		mix1	cutz_a
 mix		Mixer		mix2	drums
 * Write to disk
