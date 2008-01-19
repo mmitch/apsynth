@@ -36,7 +36,7 @@ public class SilenceDetector {
      * @return the input value for convenience
      */
     public double monitor(double value, long tick) {
-        if (value < 0.001) {
+        if (Math.abs(value) < 0.001) {
             silence += (tick-lastTick);
         } else {
             silence = 0;
