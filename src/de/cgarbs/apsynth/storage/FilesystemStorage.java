@@ -733,7 +733,7 @@ public class FilesystemStorage implements StorageBackend {
         if (path.length() > 0) {
             path += File.separator;
         }
-        directories.add(path);
+        directories.add(getDir() + path);
     }
     private static void popDir() {
         directories.removeElementAt(directories.size()-1);
