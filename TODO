@@ -1,5 +1,16 @@
+BUGS
+====
+
+ - stereo: envelopes don't seem to work
+
+
+
+
 TODO
 ====
 
  - real exception handling
+
+
+
 
