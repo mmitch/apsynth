@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class SquareWaveClass extends DefaultSignalClass {
 
@@ -29,11 +30,10 @@ public class SquareWaveClass extends DefaultSignalClass {
         private Signal duty = null;  // 0..1
       //private double lastFreq = 0;
         private double shift = 0;
-        
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
-            double freq = frequency.get(tick, local);
+            double freq = frequency.get(tick, local).getMono();
             
             /*
              * TODO implement soft frequency change
@@ -46,7 +46,7 @@ public class SquareWaveClass extends DefaultSignalClass {
              */
             
             double x = (tick+shift) / 44100 * freq; 
-            return (x - Math.floor(x) > duty.get(tick, local)) ? 1 : -1;
+            return new Stereo((x - Math.floor(x) > duty.get(tick, local).getMono()) ? 1 : -1);
 
         }
 

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class ClipperClass extends DefaultSignalClass {
@@ -31,15 +32,21 @@ public class ClipperClass extends DefaultSignalClass {
         private Signal clip;
         private boolean enveloped;
         
-        public double get(long tick, long local) {
-            double s = signal.get(tick, local);
-            double c = clip.get(tick, local);
-            if (s > c) {
-                return c;
-            } else if (s < -c) {
-                return -c;
+        public Stereo get(long tick, long local) {
+            Stereo s = signal.get(tick, local);
+            Stereo c = clip.get(tick, local);
+            Stereo ret = new Stereo(s);
+            if (s.l > c.l) {
+                ret.l = c.l;
+            } else if (s.l < -c.l) {
+                ret.l = -c.l;
             }
-            return s;
+            if (s.r > c.r) {
+                ret.r = c.r;
+            } else if (s.r < -c.r) {
+                ret.r = -c.r;
+            }
+            return ret;
         }
 
         /**
@@ -61,16 +68,23 @@ public class ClipperClass extends DefaultSignalClass {
     public class ConstantClipper implements Signal {
 
         private Signal signal;
-        private double clipPositive;
-        private double clipNegative;
+        private double clipPositive_l;
+        private double clipNegative_l;
+        private double clipPositive_r;
+        private double clipNegative_r;
         private boolean enveloped;
         
-        public double get(long tick, long local) {
-            double s = signal.get(tick, local);
-            if (s > clipPositive) {
-                return clipPositive;
-            } else if (s < clipNegative) {
-                return clipNegative;
+        public Stereo get(long tick, long local) {
+            Stereo s = new Stereo(signal.get(tick, local));
+            if (s.l > clipPositive_l) {
+                s.l = clipPositive_l;
+            } else if (s.l < clipNegative_l) {
+                s.l = clipNegative_l;
+            }
+            if (s.r > clipPositive_r) {
+                s.r = clipPositive_r;
+            } else if (s.r < clipNegative_r) {
+                s.r = clipNegative_r;
             }
             return s;
         }
@@ -81,8 +95,10 @@ public class ClipperClass extends DefaultSignalClass {
          */
         private ConstantClipper(Signal signal, Signal clip) {
             this.signal = signal;
-            this.clipPositive = clip.get(0, 0);
-            this.clipNegative = -clipPositive;
+            this.clipPositive_l = clip.get(0, 0).l;
+            this.clipNegative_l = -clipPositive_l;
+            this.clipPositive_r = clip.get(0, 0).r;
+            this.clipNegative_r = -clipPositive_r;
             this.enveloped = signal.isEnveloped();
         }
 
