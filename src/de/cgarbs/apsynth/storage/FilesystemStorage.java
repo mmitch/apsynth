@@ -720,7 +720,7 @@ public class FilesystemStorage implements StorageBackend {
     }
 
     /**
-     * Totally lame static(!) reconstruction of pwd/cwd OS behavious
+     * Totally lame static(!) reconstruction of pwd/cwd OS behaviour
      */
     private static Vector<String> directories = new Vector<String>();
     private static String getDir() {
