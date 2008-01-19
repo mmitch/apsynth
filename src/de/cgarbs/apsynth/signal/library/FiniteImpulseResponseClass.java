@@ -34,7 +34,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
         private Signal signal = null;
         private int tapcount; 
-        private int oldtapcount = -1;
+        private int oldtapcount = 0;
         private double tap[];
         private Stereo buffer[];
         private int head; 
@@ -72,6 +72,9 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             	Stereo[] newBuffer = new Stereo[tapcount];
             	for (int i=0; i<oldtapcount; i++) {
             		newBuffer[i] = buffer[i];
+            	}
+            	for (int i=oldtapcount; i<tapcount; i++) {
+            		newBuffer[i] = new Stereo();
             	}
             	this.buffer = newBuffer;
             } else if (oldtapcount > tapcount) {
