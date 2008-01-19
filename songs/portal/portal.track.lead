@@ -1,0 +1,10 @@
+speed 0;* don't wait on comments ^_^
+
+signal lfo LFO2
+
+newinstrument EnvSquine EnvSquineWave
+instrument EnvSquine lfo
+
+speed 250
+include	portal.track.lead.pattern.00
+include	portal.track.lead.pattern.00
