@@ -3,6 +3,7 @@ package de.cgarbs.apsynth.note;
 import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.SilenceDetector;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class EnvelopeNote extends Note {
 
@@ -13,7 +14,7 @@ public class EnvelopeNote extends Note {
         s = new SilenceDetector(Apsynth.samplefreq/5);
     }
 
-    public double get(long tick, long local) {
+    public Stereo get(long tick, long local) {
         return s.monitor(signal.get(tick, localTick++), tick);
     }
     

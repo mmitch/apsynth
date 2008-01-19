@@ -9,7 +9,7 @@ public interface Signal {
      * @param l local tick
      * @return current signal
 	 */
-    public double get(long t, long l);
+    public Stereo get(long t, long l);
 	
     /**
      * tell if this signal is continously or time-dependend (enveloped)

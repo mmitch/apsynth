@@ -2,6 +2,7 @@ package de.cgarbs.apsynth;
 import java.io.IOException;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 
 // TODO: make WaveWriter a true Signal
@@ -13,7 +14,7 @@ public class WaveWriter {
     public WaveWriter(Signal signal, String filename) {
         this.signal = signal;
         try {
-        	out = new de.cgarbs.apsynth.storage.WaveWriter(filename, (short)1, (short)16, Apsynth.samplefreq);
+        	out = new de.cgarbs.apsynth.storage.WaveWriter(filename, (short)2, (short)16, Apsynth.samplefreq);
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -21,14 +22,15 @@ public class WaveWriter {
         }
     }
 
-    public double write(long tick) {
+    public Stereo write(long tick) {
         if (out == null) {
-            return 0;
+            return new Stereo();
         }
         
-        double value = signal.get(tick, 0); 
+        Stereo value = signal.get(tick, 0); 
         try {
-	        out.write(value);
+	        out.write(value.l);
+	        out.write(value.r);
 	    } catch (IOException e1) {
 	        // TODO Auto-generated catch block
 	        e1.printStackTrace();

@@ -1,5 +1,7 @@
 package de.cgarbs.apsynth;
 
+import de.cgarbs.apsynth.signal.Stereo;
+
 /**
  * monitors input signals and signalizes when there has been no input for a certain time
  * 
@@ -35,8 +37,8 @@ public class SilenceDetector {
      * @param value signal value to monitor
      * @return the input value for convenience
      */
-    public double monitor(double value, long tick) {
-        if (Math.abs(value) < 0.001) {
+    public Stereo monitor(Stereo value, long tick) {
+        if (Math.abs(value.l) + Math.abs(value.r) < 0.001) {
             silence += (tick-lastTick);
         } else {
             silence = 0;

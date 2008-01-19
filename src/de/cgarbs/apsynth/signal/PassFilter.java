@@ -20,7 +20,7 @@ abstract public class PassFilter implements Signal {
 
     private boolean enveloped;
 
-    public double get(long t, long l) {
+    public Stereo get(long t, long l) {
     	newKey = getHashKey(t, l);
     	if (! newKey.equals(lastKey) ) {
             if (cache.containsKey(newKey)) {

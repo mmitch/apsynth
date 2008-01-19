@@ -4,6 +4,7 @@ import java.util.Vector;
 import de.cgarbs.apsynth.Rule;
 import de.cgarbs.apsynth.signal.Signal;
 import de.cgarbs.apsynth.signal.SignalClass;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass;
 
 
@@ -64,7 +65,7 @@ public class DynamicSignalClass extends SignalClass {
             lastVar = tmpVars.get(tmpVars.size()-1);
         }
 
-        public double get(long t, long l) {
+        public Stereo get(long t, long l) {
             return lastVar.get(t, l);
         }
 

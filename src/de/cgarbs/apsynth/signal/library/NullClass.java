@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class NullClass extends DefaultSignalClass {
 
@@ -19,12 +20,14 @@ public class NullClass extends DefaultSignalClass {
 
     public static class Null implements Signal {
 
+    	Stereo nul = new Stereo();  
+    	
         private Null () {
             // no-op: no parameters 
         }
 
-        public double get(long tick, long local) {
-            return 0;
+        public Stereo get(long tick, long local) {
+            return nul;
         }
 
         public boolean isEnveloped() {
