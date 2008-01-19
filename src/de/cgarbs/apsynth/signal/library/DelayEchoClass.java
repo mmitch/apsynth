@@ -43,6 +43,9 @@ public class DelayEchoClass extends DefaultSignalClass {
             this.amp = amp;
             this.reamp = reamp;
             this.ringBuffer = new Stereo[this.delay];
+            for (int i = 0; i < this.delay; i++) {
+            	ringBuffer[i] = new Stereo();
+            }
         }
 
         public Stereo get(long tick, long local) {
