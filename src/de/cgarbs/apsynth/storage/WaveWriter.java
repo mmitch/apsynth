@@ -79,34 +79,6 @@ public class WaveWriter {
     };
 
     /**
-     * Writes one mono sample to the file.
-     * (On stereo file, upmix is done automatically.)
-     *
-     * @param sample The sample to write (valid range: -1 to +1)
-     */
-    public void write(double sample) throws IOException
-    {
-        if ((sample < -1) || (sample > 1)) {
-            System.out.println("CLIP");
-        }
-        
-		if (bitsize == 8) {
-			byte val = (byte)((sample+1)*127); 
-			out.write(val);
-    		if (channels == 2) {
-    			out.write(val);
-    		}
-		} else {
-			short val = (short)(sample*32767);
-			out.writeWord(val);
-    		if (channels == 2) {
-    			out.writeWord(val);
-    		}
-    	}
-		samples++;
-    };
-
-    /**
      * Writes one stereo sample to the file.
      * (On mono file, downmix is done automatically.)
      *

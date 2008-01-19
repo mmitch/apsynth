@@ -29,8 +29,7 @@ public class WaveWriter {
         
         Stereo value = signal.get(tick, 0); 
         try {
-	        out.write(value.l);
-	        out.write(value.r);
+	        out.write(value.l, value.r);
 	    } catch (IOException e1) {
 	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
