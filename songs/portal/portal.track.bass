@@ -1,0 +1,17 @@
+speed 0;* don't wait on comments ^_^
+
+signal lfo LFO1
+
+instrument EnvSquine lfo
+
+speed 250
+include portal.track.pause.pattern.1bar
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.01
+include portal.track.bass.pattern.02
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.00
+include portal.track.bass.pattern.00
