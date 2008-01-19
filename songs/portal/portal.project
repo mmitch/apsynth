@@ -4,12 +4,15 @@
 
 signals portal.signals
 *
+spos	LFO1
+*
 lead	Track		portal.track.lead
 lead_a	Amplifier	lead	0.4
+lead_s	StereoPosition	lead_a	spos
 *
 * bass 	Track		portal.track.bass
 * bass_a	Amplifier	bass	0.4
 *
 * mix		Mixer		lead_a	bass_a
 *
-return	lead_a	/tmp/portal.wav
+return	lead_s	/tmp/portal.wav
