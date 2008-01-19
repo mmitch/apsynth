@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class ArpeggioClass extends DefaultSignalClass {
@@ -37,11 +38,11 @@ public class ArpeggioClass extends DefaultSignalClass {
         private Vector<Signal> signals = new Vector<Signal>();
         private boolean enveloped;
         
-        public double get(long t, long l) {
+        public Stereo get(long t, long l) {
             if (startTick == -1) {
                 startTick = t;
             }
-            if (t > startTick+(lengthInMs.get(t, l) * Apsynth.samplefreq / 1000)) {
+            if (t > startTick+(lengthInMs.get(t, l).getMono() * Apsynth.samplefreq / 1000)) {
                 startTick = t;
                 current++;
                 if (current == signals.size()) {
@@ -73,7 +74,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         private Vector<Signal> signals = new Vector<Signal>();
         private boolean enveloped;
         
-        public double get(long t, long l) {
+        public Stereo get(long t, long l) {
             if (startTick == -1) {
                 startTick = t;
             }
@@ -88,7 +89,7 @@ public class ArpeggioClass extends DefaultSignalClass {
         }
 
         private ConstantArpeggio(Signal[] s) {
-            this.lengthInTicks = s[0].get(0, 0) * Apsynth.samplefreq / 1000;
+            this.lengthInTicks = s[0].get(0, 0).getMono() * Apsynth.samplefreq / 1000;
             for (int i=1; i<s.length; i++) {
                 signals.add(s[i]);
                 this.enveloped = this.enveloped || s[i].isEnveloped();

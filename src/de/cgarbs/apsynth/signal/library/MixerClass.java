@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class MixerClass extends DefaultSignalClass {
@@ -13,7 +14,7 @@ public class MixerClass extends DefaultSignalClass {
 		checkParams(s);
         if (s[0] instanceof ConstantSignal) {
             if (s[1] instanceof ConstantSignal) {
-                return ConstantSignalClass.get(s[0].get(0,0)+s[1].get(0,0));
+                return ConstantSignalClass.get(s[0].get(0,0).mix(s[1].get(0,0)));
             } else {
                 return new ConstantMixer(s[1], s[0]);
             }
@@ -34,8 +35,8 @@ public class MixerClass extends DefaultSignalClass {
         private Signal s2;
         private boolean enveloped;
         
-        public double get(long t, long l) {
-            return s1.get(t,l) + s2.get(t,l);
+        public Stereo get(long t, long l) {
+            return new Stereo(s1.get(t,l).mix(s2.get(t,l)));
         }
 
         private Mixer(Signal s1, Signal s2) {
@@ -53,11 +54,11 @@ public class MixerClass extends DefaultSignalClass {
     public class ConstantMixer implements Signal {
 
         private Signal s1;
-        private double s2;
+        private Stereo s2;
         private boolean enveloped;
         
-        public double get(long t, long l) {
-            return s1.get(t,l) + s2;
+        public Stereo get(long t, long l) {
+            return new Stereo(s1.get(t,l).mix(s2));
         }
 
         private ConstantMixer(Signal s1, Signal s2) {

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class PinkNoiseClass extends DefaultSignalClass {
 
@@ -39,7 +40,7 @@ public class PinkNoiseClass extends DefaultSignalClass {
             // no-op: no parameters 
         }
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
         	double pink;
         	b0 = 0.99886 * b0 + Math.random() * 0.0555179;
         	b1 = 0.99332 * b1 + Math.random() * 0.0750759;
@@ -49,7 +50,7 @@ public class PinkNoiseClass extends DefaultSignalClass {
         	b5 = -0.7616 * b5 - Math.random() * 0.0168980;
         	pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + Math.random() * 0.5362;
         	b6 = Math.random() * 0.115926;
-        	return pink * 2 - 1;
+        	return new Stereo(pink * 2 - 1);
         }
 
         public boolean isEnveloped() {

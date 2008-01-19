@@ -1,5 +1,7 @@
 package de.cgarbs.apsynth;
 
+import de.cgarbs.apsynth.signal.Stereo;
+
 public class Sample {
 
     private String name;
@@ -16,11 +18,11 @@ public class Sample {
         this.data = sampledata;
     }
     
-    public double get(long step) {
+    public Stereo get(long step) {
     	if (step < data.length) {
-    		return data[(int)step];
+    		return new Stereo(data[(int)step]);
     	} else {
-    		return 0;
+    		return new Stereo();
     	}
     }
 

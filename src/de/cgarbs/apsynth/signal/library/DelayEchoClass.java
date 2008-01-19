@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class DelayEchoClass extends DefaultSignalClass {
 
@@ -30,7 +31,7 @@ public class DelayEchoClass extends DefaultSignalClass {
 
         private Signal signal = null;
         private int delay = 0;
-        private double ringBuffer[] = null;
+        private Stereo ringBuffer[] = null;
         private Signal amp = null;
         private Signal reamp = null;
         private int pos = 0;
@@ -38,16 +39,28 @@ public class DelayEchoClass extends DefaultSignalClass {
         
         private DelayEcho(Signal signal, Signal delay, Signal amp, Signal reamp) {
             this.signal = signal;
-            this.delay = (int)(delay.get(0, 0)*Apsynth.samplefreq/1000);
+            this.delay = (int)(delay.get(0, 0).getMono()*Apsynth.samplefreq/1000);
             this.amp = amp;
             this.reamp = reamp;
-            this.ringBuffer = new double[this.delay];
+            this.ringBuffer = new Stereo[this.delay];
         }
 
-        public double get(long tick, long local) {
-            double original = signal.get(tick, local);
-            double processed = original + (ringBuffer[pos] * amp.get(tick, local));
-            ringBuffer[pos] = original + (ringBuffer[pos] * reamp.get(tick, local));
+        public Stereo get(long tick, long local) {
+            Stereo original = signal.get(tick, local);
+            Stereo processed = new Stereo(
+            		original.mix(
+            				new Stereo(ringBuffer[pos].l * amp.get(tick, local).l,
+            						   ringBuffer[pos].r * amp.get(tick, local).r)
+            				)
+            				);
+
+            ringBuffer[pos] = new Stereo(
+            		original.mix(
+            				new Stereo(ringBuffer[pos].l * reamp.get(tick, local).l,
+            						   ringBuffer[pos].r * reamp.get(tick, local).r)
+            				)
+            				);
+            
             pos++;
             if (pos==delay) {
                 pos=0;

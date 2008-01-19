@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.internal.Pool;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class SampleClass extends DefaultSignalClass {
 
@@ -22,10 +23,10 @@ public class SampleClass extends DefaultSignalClass {
 
         private de.cgarbs.apsynth.Sample sample = null;
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
         	if (sample == null) {
-        		return 0;
+        		return new Stereo();
         	}
         	return sample.get(local);
         	

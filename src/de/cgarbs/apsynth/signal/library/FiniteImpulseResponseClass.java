@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.DataBlockClass.DataBlock;
 
 public class FiniteImpulseResponseClass extends DefaultSignalClass {
@@ -35,7 +36,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
         private int tapcount; 
         private int oldtapcount = -1;
         private double tap[];
-        private double buffer[];
+        private Stereo buffer[];
         private int head; 
         private boolean enveloped;
         
@@ -59,7 +60,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             
             // fill taps (data is only used in this constructor)
             for (int i=0; i<this.tapcount; i++) {
-            	tap[i] = data.get(0, i);
+            	tap[i] = data.get(0, i).getMono();
             }
             
             // duplicate coefficient table (optimization)
@@ -68,13 +69,13 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             }
 
             if (oldtapcount < tapcount) {
-            	double[] newBuffer = new double[tapcount];
+            	Stereo[] newBuffer = new Stereo[tapcount];
             	for (int i=0; i<oldtapcount; i++) {
             		newBuffer[i] = buffer[i];
             	}
             	this.buffer = newBuffer;
             } else if (oldtapcount > tapcount) {
-            	double[] newBuffer = new double[tapcount];
+            	Stereo[] newBuffer = new Stereo[tapcount];
             	for (int i=0; i<tapcount; i++) {
             		newBuffer[i] = buffer[i];
             	}
@@ -83,7 +84,7 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
 
         }
         
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
             // store new signal in ringbuffer
             head++;
@@ -93,9 +94,10 @@ public class FiniteImpulseResponseClass extends DefaultSignalClass {
             buffer[head] = signal.get(tick, local);
             
             // add all taps
-            double sum = 0;
+            Stereo sum = new Stereo();
             for (int i=0,j=tapcount-head; i<tapcount; i++,j++) {
-                sum += buffer[i] * tap[j];
+                sum.l += buffer[i].l * tap[j];
+                sum.r += buffer[i].r * tap[j];
             }
             
             return sum;

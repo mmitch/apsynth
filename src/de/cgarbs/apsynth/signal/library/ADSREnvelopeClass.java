@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class ADSREnvelopeClass extends DefaultSignalClass {
 
@@ -54,33 +55,33 @@ public class ADSREnvelopeClass extends DefaultSignalClass {
                 );
         }
         
-        public double get(long tick, long localTick) {
+        public Stereo get(long tick, long localTick) {
             
             // TODO: implement more natural exponential decay
             // see: http://en.wikipedia.org/wiki/Exponential_decay
             //      http://en.wikipedia.org/wiki/Synthesizer
             //      http://en.wikipedia.org/wiki/ADSR
             
-            if (localTick > duration.get(tick, localTick) + rtime.get(tick, localTick)) {
-                return 0;
+            if (localTick > duration.get(tick, localTick).getMono() + rtime.get(tick, localTick).getMono()) {
+                return new Stereo();
             }
-            if (localTick > duration.get(tick, localTick)) {
-                return slevel.get(tick, localTick) * (1-((localTick - duration.get(tick, localTick))/rtime.get(tick, localTick)));
+            if (localTick > duration.get(tick, localTick).getMono()) {
+                return new Stereo(slevel.get(tick, localTick).getMono() * (1-((localTick - duration.get(tick, localTick).getMono())/rtime.get(tick, localTick).getMono())));
             }
-            if (localTick >= atime.get(tick, localTick)+dtime.get(tick, localTick)) {
-                return slevel.get(tick, localTick);
+            if (localTick >= atime.get(tick, localTick).getMono() + dtime.get(tick, localTick).getMono()) {
+                return new Stereo(slevel.get(tick, localTick).getMono());
             }
-            if (localTick > atime.get(tick, localTick)) {
-                return 1 - slevel.get(tick, localTick) * ((localTick - atime.get(tick, localTick))/dtime.get(tick, localTick));
+            if (localTick > atime.get(tick, localTick).getMono()) {
+                return new Stereo(1 - slevel.get(tick, localTick).getMono() * ((localTick - atime.get(tick, localTick).getMono())/dtime.get(tick, localTick).getMono()));
             }
-            return localTick/atime.get(tick, localTick);
+            return new Stereo(localTick/atime.get(tick, localTick).getMono());
         }
     
         public boolean isFinished(long tick, long localTick, long duration) {
             
             // TODO: if slevel == 0, localTick > atime + dtime is enough
             
-            if (localTick > duration + rtime.get(tick, localTick)) {
+            if (localTick > duration + rtime.get(tick, localTick).getMono()) {
                 return true;
             }
             return false;

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class EndianChangerClass extends DefaultSignalClass {
 
@@ -25,12 +26,18 @@ public class EndianChangerClass extends DefaultSignalClass {
         private Signal signal = null;
         private boolean enveloped;
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
-            int value = (int) ((signal.get(tick, local)+1) * 32767);
-            byte low = (byte) (value % 256);
-            byte hi  = (byte) (value / 256);
-            return ((double)(low*256+hi))/65535;
+            int valuel = (int) ((signal.get(tick, local).l+1) * 32767);
+            byte hil  = (byte) (valuel / 256);
+            byte lowl = (byte) (valuel % 256);
+
+            int valuer = (int) ((signal.get(tick, local).r+1) * 32767);
+            byte lowr = (byte) (valuer % 256);
+            byte hir  = (byte) (valuer / 256);
+
+            return new Stereo(((double)(lowl*256+hil))/65535,
+            				  ((double)(lowr*256+hir))/65535);
 
         }
 

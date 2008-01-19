@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 
 public class QuantizerClass extends DefaultSignalClass {
 
@@ -25,9 +26,10 @@ public class QuantizerClass extends DefaultSignalClass {
         private Signal quant;
         private boolean enveloped;
         
-        public double get(long tick, long local) {
-            double q = quant.get(tick, local); // cache for speedup
-            return Math.round( signal.get(tick, local) * q ) / q;
+        public Stereo get(long tick, long local) {
+            double q = quant.get(tick, local).getMono(); // cache for speedup
+            return new Stereo(Math.round( signal.get(tick, local).l * q ) / q,
+            		          Math.round( signal.get(tick, local).r * q ) / q);
         }
 
         /**

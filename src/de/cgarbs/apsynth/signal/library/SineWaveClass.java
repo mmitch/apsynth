@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class SineWaveClass extends DefaultSignalClass {
@@ -31,9 +32,9 @@ public class SineWaveClass extends DefaultSignalClass {
         private double lastFreq = 0;
         private double shift = 0;
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
-            double freq = frequency.get(tick, local);
+            double freq = frequency.get(tick, local).getMono();
             
             if (lastFreq != freq) {
                 if (tick > 0) {
@@ -42,7 +43,7 @@ public class SineWaveClass extends DefaultSignalClass {
                 lastFreq = freq;
             }
             
-            return Math.sin((tick+shift) * 2*Math.PI / Apsynth.samplefreq * freq);
+            return new Stereo(Math.sin((tick+shift) * 2*Math.PI / Apsynth.samplefreq * freq));
 
         }
 
@@ -60,12 +61,12 @@ public class SineWaveClass extends DefaultSignalClass {
 
         private double factor = 0;
 
-        public double get(long tick, long local) {
-            return Math.sin(tick * factor);
+        public Stereo get(long tick, long local) {
+            return new Stereo(Math.sin(tick * factor));
         }
 
         private ConstantSineWave(Signal frequency) {
-            this.factor = frequency.get(0, 0) * 2*Math.PI / Apsynth.samplefreq;
+            this.factor = frequency.get(0, 0).getMono() * 2*Math.PI / Apsynth.samplefreq;
         }
 
         public boolean isEnveloped() {

@@ -1,6 +1,7 @@
 package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class AmplifierClass extends DefaultSignalClass {
@@ -29,8 +30,9 @@ public class AmplifierClass extends DefaultSignalClass {
         private Signal s2;
         private boolean enveloped;
         
-        public double get(long t, long l) {
-            return s1.get(t, l) * s2.get(t, l);
+        public Stereo get(long t, long l) {
+            return new Stereo(s1.get(t, l).l * s2.get(t, l).l,
+            		          s1.get(t, l).r * s2.get(t, l).r);
         }
 
         private Amplifier(Signal s1, Signal s2) {
@@ -48,11 +50,12 @@ public class AmplifierClass extends DefaultSignalClass {
     public class ConstantAmplifier implements Signal {
 
         private Signal s1;
-        private double s2;
+        private Stereo s2;
         private boolean enveloped;
         
-        public double get(long t, long l) {
-            return s1.get(t, l) * s2;
+        public Stereo get(long t, long l) {
+            return new Stereo(s1.get(t, l).l * s2.l,
+            		          s1.get(t, l).r * s2.r);
         }
 
         private ConstantAmplifier(Signal s1, Signal s2) {

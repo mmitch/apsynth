@@ -2,6 +2,7 @@ package de.cgarbs.apsynth.signal.library;
 
 import de.cgarbs.apsynth.Apsynth;
 import de.cgarbs.apsynth.signal.Signal;
+import de.cgarbs.apsynth.signal.Stereo;
 import de.cgarbs.apsynth.signal.library.ConstantSignalClass.ConstantSignal;
 
 public class SawtoothWaveClass extends DefaultSignalClass {
@@ -33,13 +34,13 @@ public class SawtoothWaveClass extends DefaultSignalClass {
       //private double lastFreq = 0;
         private double shift = 0;
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
             // TODO implement bandwith limited construction
             // using sine waves
             // see http://en.wikipedia.org/wiki/Saw_wave
             
-            double freq = frequency.get(tick, local);
+            double freq = frequency.get(tick, local).getMono();
             
             /*
              * TODO implement soft frequency change
@@ -52,7 +53,7 @@ public class SawtoothWaveClass extends DefaultSignalClass {
              */
             
             double x = (tick+shift) / Apsynth.samplefreq * freq; 
-            return (x - Math.floor(x))*2-1;
+            return new Stereo((x - Math.floor(x))*2-1);
 
         }
 
@@ -71,15 +72,15 @@ public class SawtoothWaveClass extends DefaultSignalClass {
 
         private double factor = 0;
 
-        public double get(long tick, long local) {
+        public Stereo get(long tick, long local) {
 
             double x = tick * factor; 
-            return (x - Math.floor(x))*2-1;
+            return new Stereo((x - Math.floor(x))*2-1);
 
         }
 
         private ConstantSawtoothWave(Signal frequency) {
-            this.factor = frequency.get(0, 0) / Apsynth.samplefreq;
+            this.factor = frequency.get(0, 0).getMono() / Apsynth.samplefreq;
             
         }
 
